@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<winUiEx:WindowEx
+    x:Class="App.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winUiEx="using:WinUIEx"
+    mc:Ignorable="d">
+    <winUiEx:WindowEx.SystemBackdrop>
+        <MicaBackdrop Kind="Base"/>
+    </winUiEx:WindowEx.SystemBackdrop>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" x:Name="AppTitlebar"
+              Height="48" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <SymbolIcon Symbol="Calendar" Grid.Column="0" Margin="16 0" HorizontalAlignment="Left"/>
+            <TextBlock Text="Application" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource CaptionTextBlockStyle}"/>
+        </Grid>
+
+        <NavigationView Grid.Row="1" Header="Home" x:Name="NavigationView">
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox PlaceholderText="Search">
+                    <AutoSuggestBox.QueryIcon>
+                        <SymbolIcon Symbol="Find"/>
+                    </AutoSuggestBox.QueryIcon>
+                </AutoSuggestBox>
+            </NavigationView.AutoSuggestBox>
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Home" Icon="Home"/>
+                <NavigationViewItem Content="Calendar" Icon="Calendar"></NavigationViewItem>
+                <NavigationViewItem Content="Notes">
+                    <NavigationViewItem.Icon>
+                        <PathIcon Data="F1 M24,24z M0,0z M17.75,3A3.25,3.25,0,0,1,21,6.25L21,13.129A2.25,2.25,0,0,1,20.341,14.719L14.72,20.341A2.25,2.25,0,0,1,13.129,21L6.25,21A3.25,3.25,0,0,1,3,17.75L3,6.25A3.25,3.25,0,0,1,6.25,3L17.75,3z M17.75,4.5L6.25,4.5A1.75,1.75,0,0,0,4.5,6.25L4.5,17.75C4.5,18.716,5.284,19.5,6.25,19.5L13,19.5 13,16.25A3.25,3.25,0,0,1,16.066,13.005L16.25,13 19.5,13 19.5,6.25A1.75,1.75,0,0,0,17.75,4.5z M18.439,14.5L16.25,14.5A1.75,1.75,0,0,0,14.506,16.107L14.5,16.25 14.5,18.439 18.439,14.5z"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Notebook">
+                    <NavigationViewItem.Icon>
+                        <PathIcon Data="F1 M24,24z M0,0z M16.749,2A2.25,2.25,0,0,1,18.999,4.25L18.999,19.75A2.25,2.25,0,0,1,16.749,22L6.25,22A2.25,2.25,0,0,1,4,19.75L4,4.25A2.25,2.25,0,0,1,6.25,2L16.749,2z M16.749,3.5L6.25,3.5A0.75,0.75,0,0,0,5.5,4.25L5.5,19.75C5.5,20.164,5.836,20.5,6.25,20.5L16.749,20.5A0.75,0.75,0,0,0,17.499,19.75L17.499,4.25A0.75,0.75,0,0,0,16.749,3.5z M20,15.002L20.75,15.002A0.75,0.75,0,0,1,21.493,15.65L21.5,15.752 21.5,17.25A0.75,0.75,0,0,1,20.852,17.993L20.75,18 20,18 20,15.002 20.75,15.002 20,15.002z M20,11.002L20.75,11.002A0.75,0.75,0,0,1,21.493,11.65L21.5,11.752 21.5,13.25A0.75,0.75,0,0,1,20.852,13.993L20.75,14 20,14 20,11.002 20.75,11.002 20,11.002z M20,7.002L20.75,7.002A0.75,0.75,0,0,1,21.493,7.65L21.5,7.752 21.5,9.25A0.75,0.75,0,0,1,20.852,9.993L20.75,10 20,10 20,7.002 20.75,7.002 20,7.002z M15.249,5A0.75,0.75,0,0,1,15.999,5.75L15.999,8.248A0.75,0.75,0,0,1,15.249,8.998L7.75,8.998A0.75,0.75,0,0,1,7,8.248L7,5.75A0.75,0.75,0,0,1,7.75,5L15.249,5z M14.499,6.5L8.5,6.5 8.5,7.498 14.499,7.498 14.499,6.5z"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+            <Frame Margin="56 24 0 0"/>
+        </NavigationView>
+    </Grid>
+
+</winUiEx:WindowEx>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="App.Controls.StickyNoteControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" MinWidth="250" MinHeight="250" MaxHeight="250" MaxWidth="250">
+    <Border Width="250" Height="250" BorderThickness="3" CornerRadius="3">
+        <Border.Background>
+            <SolidColorBrush Color="{x:Bind BackgroundColor}"/>
+        </Border.Background>
+        <Border.BorderBrush>
+            <SolidColorBrush Color="{x:Bind BackgroundColor}" Opacity="0.5"/>
+        </Border.BorderBrush>
+        
+        <Grid Width="235" Height="235" Margin="4">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{x:Bind NoteText}" VerticalAlignment="Stretch" TextWrapping="WrapWholeWords" TextTrimming="CharacterEllipsis">
+                
+            </TextBlock>
+            <Button Grid.Row="1">
+                <Button.Content>
+                    <SymbolIcon Symbol="Delete"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+    </Border>
+
+</UserControl>
