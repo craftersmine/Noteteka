@@ -16,6 +16,7 @@
 		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Dialogs\AddNoteDialog.xaml" />
 	  <None Remove="HomePage.xaml" />
 	  <None Remove="Icons.xaml" />
 	  <None Remove="UserControl1.xaml" />
@@ -55,6 +56,11 @@
 	<ItemGroup>
 	  <Folder Include="Resources\" />
 	  <Folder Include="Pages\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Dialogs\AddNoteDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="UserControl1.xaml">

@@ -8,12 +8,14 @@ using Microsoft.UI.Xaml.Navigation;
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
+using App.Controls;
 using WinUIEx;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -26,6 +28,8 @@ namespace App
     /// </summary>
     public sealed partial class MainWindow : WindowEx
     {
+        public ContentDialog ContentDialogHost => ContentDialog;
+
         public MainWindow()
         {
             this.InitializeComponent();
