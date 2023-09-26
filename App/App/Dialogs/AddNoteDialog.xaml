@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:App.Dialogs"
+    xmlns:core="using:App.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -16,6 +17,25 @@
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" AcceptsReturn="True" Width="250" Height="250" PlaceholderText="Enter note text..." x:Name="NoteTextTextBox"/>
         <TextBlock Grid.Row="1" Text="Select note color:" Margin="0 8 0 8"/>
-        <ComboBox Grid.Row="2" HorizontalAlignment="Stretch"></ComboBox>
+        <ComboBox Grid.Row="2" x:Name="ColorComboBox" SelectedIndex="0" HorizontalAlignment="Stretch" ItemsSource="{x:Bind core:StickyNoteColor.StickyNoteColors}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="core:StickyNoteColor">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Width="16" Height="16" CornerRadius="4" Margin="0 0 8 0">
+                            <Border.Background>
+                                <SolidColorBrush Color="{x:Bind Color}"/>
+                            </Border.Background>
+                        </Border>
+
+                        <TextBlock Grid.Column="1" Text="{x:Bind Name}"/>
+                    </Grid>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
     </Grid>
 </Page>

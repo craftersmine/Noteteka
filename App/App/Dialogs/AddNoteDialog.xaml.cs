@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using App.Core;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -24,6 +25,7 @@ namespace App.Dialogs
     public sealed partial class AddNoteDialog : Page
     {
         public string NoteText => NoteTextTextBox.Text;
+        public StickyNoteColor Color => ColorComboBox.SelectedItem as StickyNoteColor;
 
         public AddNoteDialog()
         {

@@ -15,7 +15,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using App.Controls;
+using App.Core;
 using App.Dialogs;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -28,15 +30,18 @@ namespace App
     /// </summary>
     public sealed partial class HomePage : Page
     {
-        public ObservableCollection<StickyNoteControl> StickyNotes = new ObservableCollection<StickyNoteControl>();
+        public ObservableCollection<StickyNote> StickyNotes = new ObservableCollection<StickyNote>();
         public HomePage()
         {
             this.InitializeComponent();
+            
+
         }
 
         private void AddNote(object sender, RoutedEventArgs e)
         {
-            ContentDialog dlg = Utilities.GetParent<MainWindow>(this).ContentDialogHost;
+
+            ContentDialog dlg = MainWindow.ContentDialogHost;
             AddNoteDialog dlgContent = new AddNoteDialog();
             dlg.Title = "Add new note";
             dlg.Content = dlgContent;
@@ -51,10 +56,10 @@ namespace App
         {
             AddNoteDialog dlgContent = (AddNoteDialog)sender.Content;
 
-            StickyNotes.Add(new StickyNoteControl()
+            StickyNotes.Add(new StickyNote()
             {
-                NoteText = dlgContent.NoteText,
-                StickyNoteColor = StickyNoteColor.Yellow
+                Text = dlgContent.NoteText,
+                Color = dlgContent.Color
             });
             sender.PrimaryButtonClick -= Dlg_PrimaryButtonClick;
         }

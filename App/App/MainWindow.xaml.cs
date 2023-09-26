@@ -28,13 +28,15 @@ namespace App
     /// </summary>
     public sealed partial class MainWindow : WindowEx
     {
-        public ContentDialog ContentDialogHost => ContentDialog;
+        public static ContentDialog ContentDialogHost { get; private set; }
 
         public MainWindow()
         {
             this.InitializeComponent();
 
             ExtendsContentIntoTitleBar = true;
+
+            ContentDialogHost = ContentDialog;
 
             SetTitleBar(AppTitlebar);
             (NavigationView.Content as Frame).Navigate(typeof(HomePage));
