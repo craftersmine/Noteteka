@@ -54,6 +54,7 @@
 	  </Page>
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Controls\" />
 	  <Folder Include="Resources\" />
 	  <Folder Include="Pages\" />
 	</ItemGroup>
