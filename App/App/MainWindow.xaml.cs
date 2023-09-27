@@ -15,7 +15,7 @@ using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
-using App.Controls;
+using App.Pages;
 using WinUIEx;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -39,7 +39,33 @@ namespace App
             ContentDialogHost = ContentDialog;
 
             SetTitleBar(AppTitlebar);
-            (NavigationView.Content as Frame).Navigate(typeof(HomePage));
+            NavigateTo<HomePage>();
+            
+        }
+
+        private void OnNavigationViewItemChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            switch (((Control)args.SelectedItem)?.Tag.ToString()?.ToLower())
+            {
+                case "homepage":
+                    NavigateTo<HomePage>();
+                    break;
+                case "calendar":
+                    NavigateTo<CalendarPage>();
+                    break;
+                case "notes":
+                    break;
+                case "notebook":
+                    break;
+                case "settings":
+                    break;
+            }
+        }
+
+        private void NavigateTo<T>()
+        {
+            (NavigationView.Content as Frame).Navigate(typeof(T));
+            NavigationView.Header = ((NavigationView.Content as Frame).Content as Page).Tag;
         }
     }
 }
