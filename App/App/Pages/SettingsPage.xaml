@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="App.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d" Tag="Settings">
+
+    <ScrollViewer>
+        <StackPanel Margin="0 0 16 0">
+            <controls:SettingsCard Header="Database purge" Description="Purge whole application database. This can fix a bunch of problems with data loading, but you will lose all your data!">
+                <controls:SettingsCard.HeaderIcon>
+                    <SymbolIcon Symbol="Delete"/>
+                </controls:SettingsCard.HeaderIcon>
+                <Button Style="{ThemeResource AccentButtonStyle}" Background="#dd1100" Content="Purge Database">
+                    <Button.Flyout>
+                        <Flyout>
+                            <StackPanel Width="250">
+                                <TextBlock Text="Are you sure you want to purge your application database? This action is irreversible!" TextWrapping="Wrap" Margin="0 0 0 8"/>
+                                <Button Content="Yes, purge database." Click="OnDatabasePurgeConfirmClick"/>
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+            </controls:SettingsCard>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
