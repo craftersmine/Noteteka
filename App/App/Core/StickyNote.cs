@@ -1,18 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using Windows.UI;
+using App.Extensions;
+using CommunityToolkit.WinUI.Helpers;
 
 namespace App.Core
 {
     public class StickyNote
     {
-        public StickyNoteColor Color { get; set; }
+        [NotMapped]
+        public Color Color
+        {
+            get
+            {
+                return ColorValue.ToColor();
+            }
+            set
+            {
+                ColorValue = value.ToInt();
+            }
+        }
+        public int ColorValue { get; set; }
         public string Text { get; set; }
+        [Key]
         public int Id { get; set; }
     }
 
@@ -27,8 +44,29 @@ namespace App.Core
             new StickyNoteColor("Red", Color.FromArgb(255, 165, 81, 95))
         };
 
+        [Key]
         public string Name { get; set; }
-        public Color Color { get; set; }
+
+        [NotMapped]
+        public Color Color
+        {
+            get
+            {
+                return ColorValue.ToColor();
+            }
+            set
+            {
+                ColorValue = value.ToInt();
+            }
+        }
+
+        public int ColorValue { get; set; }
+
+        public StickyNoteColor()
+        {
+            Name = "Yellow";
+            Color = Color.FromArgb(255, 175, 156, 72);
+        }
 
         public StickyNoteColor(string name, Color color)
         {
