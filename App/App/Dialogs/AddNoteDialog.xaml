@@ -11,11 +11,11 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" AcceptsReturn="True" Width="250" Height="250" PlaceholderText="Enter note text..." x:Name="NoteTextTextBox"/>
+        <TextBox Grid.Row="0" AcceptsReturn="True" Width="250" Height="210" PlaceholderText="Enter note text..." x:Name="NoteTextTextBox" TextWrapping="Wrap" Margin="0 0 0 8"/>
         <TextBlock Grid.Row="1" Text="Select note color:" Margin="0 8 0 8"/>
         <ComboBox Grid.Row="2" x:Name="ColorComboBox" SelectedIndex="0" HorizontalAlignment="Stretch" ItemsSource="{x:Bind core:StickyNoteColor.StickyNoteColors}">
             <ComboBox.ItemTemplate>
