@@ -35,6 +35,13 @@ namespace App
         public App()
         {
             this.InitializeComponent();
+
+            Application.Current.UnhandledException += Current_UnhandledException;
+        }
+
+        private void Current_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            throw e.Exception;
         }
 
         /// <summary>
