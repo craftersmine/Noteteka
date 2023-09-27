@@ -38,9 +38,9 @@ namespace App
 
         private void AddNote(object sender, RoutedEventArgs e)
         {
-
-            ContentDialog dlg = MainWindow.ContentDialogHost;
+            ContentDialog dlg = new ContentDialog();
             AddNoteDialog dlgContent = new AddNoteDialog();
+            dlg.XamlRoot = this.XamlRoot;
             dlg.Title = "Add new note";
             dlg.Content = dlgContent;
             dlg.CloseButtonText = "Cancel";
