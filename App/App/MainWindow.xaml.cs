@@ -39,7 +39,8 @@ namespace App
             ContentDialogHost = ContentDialog;
 
             SetTitleBar(AppTitlebar);
-            NavigateTo<HomePage>();
+
+            NavigationView.SelectedItem = NavigationView.MenuItems.FirstOrDefault(i => (i as NavigationViewItem).Tag.ToString().ToLower() == "homepage");
             
         }
 
