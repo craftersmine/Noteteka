@@ -27,7 +27,7 @@
                 </Button>
             </Grid>
 
-            <GridView ItemsSource="{x:Bind StickyNotes}" SelectionMode="None" Grid.Row="1" Margin="0 8 0 0" Height="265" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <GridView ItemsSource="{x:Bind Path=local:App.DatabaseContext.StickyNotes}" x:Name="NotesGridView" SelectionMode="None" Grid.Row="1" Margin="0 8 0 0" Height="265" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid/>
@@ -37,10 +37,10 @@
                     <DataTemplate x:DataType="core:StickyNote">
                         <Border Width="250" Height="250" CornerRadius="4" Padding="0" BorderThickness="3">
                             <Border.Background>
-                                <SolidColorBrush Color="{x:Bind Color.Color}"/>
+                                <SolidColorBrush Color="{x:Bind Color}"/>
                             </Border.Background>
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="{x:Bind Color.Color}" Opacity="0.5"/>
+                                <SolidColorBrush Color="{x:Bind Color}" Opacity="0.5"/>
                             </Border.BorderBrush>
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -69,7 +69,7 @@
                                         <SymbolIcon Symbol="Edit"/>
                                     </Button>
                                 </Grid>
-                                <TextBlock Grid.Row="0" Text="{x:Bind Text}" Width="240" Height="210" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <TextBlock Grid.Row="0" Text="{x:Bind Text}" Width="230" Height="210" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 4 0 0"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

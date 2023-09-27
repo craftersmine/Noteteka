@@ -29,12 +29,11 @@ namespace App
     /// </summary>
     public sealed partial class HomePage : Page
     {
-        public ObservableCollection<StickyNote> StickyNotes = new ObservableCollection<StickyNote>();
         public HomePage()
         {
             this.InitializeComponent();
-            
 
+            StickyNote[] notes = App.DatabaseContext.StickyNotes.ToArray();
         }
 
         private void AddNote(object sender, RoutedEventArgs e)
@@ -51,16 +50,21 @@ namespace App
             dlg.ShowAsync();
         }
 
-        private void Dlg_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void Dlg_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             AddNoteDialog dlgContent = (AddNoteDialog)sender.Content;
 
-            StickyNotes.Add(new StickyNote()
+            App.DatabaseContext.StickyNotes.Add(new StickyNote()
             {
                 Text = dlgContent.NoteText,
-                Color = dlgContent.Color
+                Color = dlgContent.Color.Color
             });
+            await App.DatabaseContext.SaveChangesAsync();
             sender.PrimaryButtonClick -= Dlg_PrimaryButtonClick;
+
+            NotesGridView.ItemsSource = null;
+            NotesGridView.Items.Clear();
+            NotesGridView.ItemsSource = App.DatabaseContext.StickyNotes;
         }
     }
 }
