@@ -19,6 +19,7 @@
 	  <None Remove="Dialogs\AddNoteDialog.xaml" />
 	  <None Remove="HomePage.xaml" />
 	  <None Remove="Icons.xaml" />
+	  <None Remove="Pages\CalendarPage.xaml" />
 	  <None Remove="UserControl1.xaml" />
 	</ItemGroup>
 
@@ -34,6 +35,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.WinUI" Version="7.1.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.11" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230822000" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
 		<PackageReference Include="WinUIEx" Version="2.3.0" />
@@ -55,8 +57,11 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Controls\" />
-	  <Folder Include="Resources\" />
-	  <Folder Include="Pages\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Pages\CalendarPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Dialogs\AddNoteDialog.xaml">
