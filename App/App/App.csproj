@@ -14,12 +14,14 @@
 		<SelfContained>true</SelfContained>
 		<!-- This bundles the WinUI3 components -->
 		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+		<AssemblyName>YourNote</AssemblyName>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Dialogs\AddNoteDialog.xaml" />
 	  <None Remove="HomePage.xaml" />
 	  <None Remove="Icons.xaml" />
 	  <None Remove="Pages\CalendarPage.xaml" />
+	  <None Remove="Pages\SettingsPage.xaml" />
 	  <None Remove="UserControl1.xaml" />
 	</ItemGroup>
 
@@ -34,11 +36,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.WinUI" Version="7.1.2" />
+		<PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.0.230907" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.11" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230822000" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
-		<PackageReference Include="WinUIEx" Version="2.3.0" />
+		<PackageReference Include="WinUIEx" Version="2.3.1" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
@@ -57,6 +59,11 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Controls\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Pages\SettingsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Pages\CalendarPage.xaml">
