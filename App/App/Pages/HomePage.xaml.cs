@@ -16,7 +16,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
-using App.Controls;
 using App.Core;
 using App.Dialogs;
 
