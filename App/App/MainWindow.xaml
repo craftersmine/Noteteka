@@ -19,8 +19,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ContentDialog Grid.Row="1" x:Name="ContentDialog"/>
-
         <Grid Grid.Row="0" x:Name="AppTitlebar"
               Height="48" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>

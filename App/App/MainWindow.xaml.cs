@@ -15,6 +15,7 @@ using System.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
+using App.Core;
 using App.Pages;
 using WinUIEx;
 
@@ -28,20 +29,22 @@ namespace App
     /// </summary>
     public sealed partial class MainWindow : WindowEx
     {
-        public static ContentDialog ContentDialogHost { get; private set; }
-
         public MainWindow()
         {
             this.InitializeComponent();
 
             ExtendsContentIntoTitleBar = true;
 
-            ContentDialogHost = ContentDialog;
-
             SetTitleBar(AppTitlebar);
 
             NavigationView.SelectedItem = NavigationView.MenuItems.FirstOrDefault(i => (i as NavigationViewItem).Tag.ToString().ToLower() == "homepage");
-            
+
+            CalendarEvent evt = new CalendarEvent();
+            evt.IsRepeating = true;
+            evt.RepeatAction = new EveryWeekdayEventRepeat(new DayOfWeek[]
+                { DayOfWeek.Monday, DayOfWeek.Thursday, DayOfWeek.Saturday });
+            evt.EventDateTime = DateTime.Now;
+            evt.OnEventOccurred();
         }
 
         private void OnNavigationViewItemChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
