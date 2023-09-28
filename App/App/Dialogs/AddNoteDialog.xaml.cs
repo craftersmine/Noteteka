@@ -26,10 +26,20 @@ namespace App.Dialogs
     {
         public string NoteText => NoteTextTextBox.Text;
         public StickyNoteColor Color => ColorComboBox.SelectedItem as StickyNoteColor;
+        public bool IsEditing { get; }
+        public StickyNote? StickyNote { get; }
 
-        public AddNoteDialog()
+        public AddNoteDialog(StickyNote? note)
         {
             this.InitializeComponent();
+
+            StickyNote = note;
+
+            if (StickyNote is not null)
+            {
+                NoteTextTextBox.Text = StickyNote.Text;
+                IsEditing = true;
+            }
         }
     }
 }

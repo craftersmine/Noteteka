@@ -60,12 +60,12 @@
                                             <Flyout>
                                                 <StackPanel>
                                                     <TextBlock Text="Are you sure you want to delete this note?" Margin="0 0 0 12"/>
-                                                    <Button Content="Yes, delete it" Tag="{x:Bind Id}"/>
+                                                    <Button Content="Yes, delete it" Tag="{x:Bind Id}" Click="DeleteNoteConfirmClick"/>
                                                 </StackPanel>
                                             </Flyout>
                                         </Button.Flyout>
                                     </Button>
-                                    <Button Grid.Column="1" HorizontalAlignment="Left" Margin="2">
+                                    <Button Grid.Column="1" HorizontalAlignment="Left" Margin="2" Click="EditNoteClick" Tag="{x:Bind Id}">
                                         <SymbolIcon Symbol="Edit"/>
                                     </Button>
                                 </Grid>

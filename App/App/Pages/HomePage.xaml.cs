@@ -39,7 +39,7 @@ namespace App
         private void AddNote(object sender, RoutedEventArgs e)
         {
             ContentDialog dlg = new ContentDialog();
-            AddNoteDialog dlgContent = new AddNoteDialog();
+            AddNoteDialog dlgContent = new AddNoteDialog(null);
             dlg.XamlRoot = this.XamlRoot;
             dlg.Title = "Add new note";
             dlg.Content = dlgContent;
@@ -54,17 +54,56 @@ namespace App
         {
             AddNoteDialog dlgContent = (AddNoteDialog)sender.Content;
 
-            App.DatabaseContext.StickyNotes.Add(new StickyNote()
+            if (!dlgContent.IsEditing)
             {
-                Text = dlgContent.NoteText,
-                Color = dlgContent.Color.Color
-            });
+                App.DatabaseContext.StickyNotes.Add(new StickyNote()
+                {
+                    Text = dlgContent.NoteText,
+                    Color = dlgContent.Color.Color
+                });
+            }
+            else
+            {
+                StickyNote note = App.DatabaseContext.StickyNotes.First(n => n.Id == dlgContent.StickyNote.Id);
+                note.Text = dlgContent.NoteText;
+                note.Color = dlgContent.Color.Color;
+            }
             await App.DatabaseContext.SaveChangesAsync();
             sender.PrimaryButtonClick -= Dlg_PrimaryButtonClick;
 
+            UpdateNotesList();
+        }
+
+        private void DeleteNoteConfirmClick(object sender, RoutedEventArgs e)
+        {
+            StickyNote noteToDelete = App.DatabaseContext.StickyNotes.First(n => n.Id == (int)((Button)sender).Tag);
+            App.DatabaseContext.StickyNotes.Remove(noteToDelete);
+            App.DatabaseContext.SaveChanges();
+
+            UpdateNotesList();
+        }
+
+        private void UpdateNotesList()
+        {
             NotesGridView.ItemsSource = null;
             NotesGridView.Items.Clear();
             NotesGridView.ItemsSource = App.DatabaseContext.StickyNotes;
+        }
+
+        private void EditNoteClick(object sender, RoutedEventArgs e)
+        {
+            ContentDialog dlg = new ContentDialog();
+
+            StickyNote note = App.DatabaseContext.StickyNotes.First(n => n.Id == (int)((Button)sender).Tag);
+            AddNoteDialog dlgContent = new AddNoteDialog(note);
+            dlg.XamlRoot = this.XamlRoot;
+            dlg.Title = "Edit note";
+            dlg.Content = dlgContent;
+            dlg.CloseButtonText = "Cancel";
+            dlg.PrimaryButtonText = "Add";
+            dlg.CloseButtonClick += (dialog, args) => dialog.Hide();
+            dlg.PrimaryButtonClick += Dlg_PrimaryButtonClick;
+            dlg.ShowAsync();
         }
     }
 }
