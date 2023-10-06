@@ -34,6 +34,7 @@ namespace App
             this.InitializeComponent();
 
             UpdateNotesList();
+            UpdateUpcomingTasks();
         }
 
         private void AddNote(object sender, RoutedEventArgs e)
@@ -88,7 +89,7 @@ namespace App
             NotesGridView.ItemsSource = null;
             NotesGridView.Items.Clear();
 
-            if (App.DatabaseContext.StickyNotes.Count() > 0)
+            if (App.DatabaseContext.StickyNotes.Any())
             {
                 NotesGridView.Visibility = Visibility.Visible;
                 NotesGridView.ItemsSource = App.DatabaseContext.StickyNotes;
@@ -103,7 +104,20 @@ namespace App
 
         private void UpdateUpcomingTasks()
         {
+            CalendarEventsGridView.ItemsSource = null;
+            CalendarEventsGridView.Items.Clear();
 
+            if (App.DatabaseContext.CalendarEvents.Any())
+            {
+                CalendarEventsGridView.Visibility = Visibility.Visible;
+                CalendarEventsGridView.ItemsSource = App.DatabaseContext.CalendarEvents;
+                NoCalendarEventsLabel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                CalendarEventsGridView.Visibility = Visibility.Collapsed;
+                NoCalendarEventsLabel.Visibility = Visibility.Visible;
+            }
         }
 
         private void EditNoteClick(object sender, RoutedEventArgs e)
