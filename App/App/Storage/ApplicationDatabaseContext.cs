@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.Core;
+using App.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Storage
@@ -14,6 +15,7 @@ namespace App.Storage
         public string ApplicationDatabasePath { get; private set; }
 
         public DbSet<StickyNote> StickyNotes { get; set; }
+        public DbSet<CalendarEvent> CalendarEvents { get; set; }
 
         public ApplicationDatabaseContext()
         {
@@ -22,6 +24,9 @@ namespace App.Storage
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CalendarEvent>().Property(p => p.RepeatOnDays)
+                .HasConversion(v => v.ToCommaSeparatedString(), v => v.FromCommaSeparatedString<DayOfWeek>());
+
             base.OnModelCreating(modelBuilder);
         }
 
