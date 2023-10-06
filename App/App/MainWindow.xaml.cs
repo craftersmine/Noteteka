@@ -38,13 +38,6 @@ namespace App
             SetTitleBar(AppTitlebar);
 
             NavigationView.SelectedItem = NavigationView.MenuItems.FirstOrDefault(i => (i as NavigationViewItem).Tag.ToString().ToLower() == "homepage");
-
-            CalendarEvent evt = new CalendarEvent();
-            evt.IsRepeating = true;
-            evt.RepeatAction = new EveryWeekdayEventRepeat(new DayOfWeek[]
-                { DayOfWeek.Monday, DayOfWeek.Thursday, DayOfWeek.Saturday });
-            evt.EventDateTime = DateTime.Now;
-            evt.OnEventOccurred();
         }
 
         private void OnNavigationViewItemChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

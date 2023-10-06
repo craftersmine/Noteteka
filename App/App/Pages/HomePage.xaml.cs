@@ -33,7 +33,7 @@ namespace App
         {
             this.InitializeComponent();
 
-            StickyNote[] notes = App.DatabaseContext.StickyNotes.ToArray();
+            UpdateNotesList();
         }
 
         private void AddNote(object sender, RoutedEventArgs e)
@@ -87,7 +87,23 @@ namespace App
         {
             NotesGridView.ItemsSource = null;
             NotesGridView.Items.Clear();
-            NotesGridView.ItemsSource = App.DatabaseContext.StickyNotes;
+
+            if (App.DatabaseContext.StickyNotes.Count() > 0)
+            {
+                NotesGridView.Visibility = Visibility.Visible;
+                NotesGridView.ItemsSource = App.DatabaseContext.StickyNotes;
+                NoNotesLabel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                NotesGridView.Visibility = Visibility.Collapsed;
+                NoNotesLabel.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void UpdateUpcomingTasks()
+        {
+
         }
 
         private void EditNoteClick(object sender, RoutedEventArgs e)
