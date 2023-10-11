@@ -35,6 +35,8 @@ namespace App
 
         public static ApplicationDatabaseContext DatabaseContext { get; private set; }
 
+        public static bool DatabaseRestored { get; private set; }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -63,21 +65,42 @@ namespace App
 
             if (Environment.GetCommandLineArgs().Contains("--purge-db"))
             {
-                string dbFile = Path.Combine(ApplicationDataStoragePath, "DataStorage.db");
-                
-                File.Delete(dbFile);
-                File.Delete(dbFile + "-shm");
-                File.Delete(dbFile + "-wal");
+                PurgeDatabase();
             }
 
             Application.Current.UnhandledException += Current_UnhandledException;
 
-            DatabaseContext = new ApplicationDatabaseContext();
+            try
+            {
+                DatabaseContext = new ApplicationDatabaseContext();
+            }
+            catch (Exception e)
+            {
+                BackupDatabase();
+                PurgeDatabase();
+                DatabaseContext = new ApplicationDatabaseContext();
+            }
 
             m_window = new MainWindow();
             m_window.Activate();
         }
 
         private Window m_window;
+
+        private void PurgeDatabase()
+        {
+            string dbFile = Path.Combine(ApplicationDataStoragePath, "DataStorage.db");
+                
+            File.Delete(dbFile);
+            File.Delete(dbFile + "-shm");
+            File.Delete(dbFile + "-wal");
+        }
+
+        public void BackupDatabase()
+        {
+            string dbFile = Path.Combine(ApplicationDataStoragePath, "DataStorage.db");
+
+            File.Copy(dbFile, Path.ChangeExtension(dbFile, ".db-backup"));
+        }
     }
 }
