@@ -34,7 +34,7 @@
                 </GridView.ItemsPanel>
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="core:StickyNote">
-                        <Border Width="250" Height="250" CornerRadius="4" Padding="0" BorderThickness="3">
+                        <Border Width="250" Height="250" CornerRadius="4" Padding="8" BorderThickness="3">
                             <Border.Background>
                                 <SolidColorBrush Color="{x:Bind Color}"/>
                             </Border.Background>
@@ -80,7 +80,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="Upcoming tasks and events" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <TextBlock Grid.Column="0" Text="Tasks to do" Style="{StaticResource SubtitleTextBlockStyle}"/>
                 <Button Grid.Column="1">
                     <Button.Content>
                         <SymbolIcon Symbol="Add"/>
@@ -88,21 +88,20 @@
                 </Button>
             </Grid>
 
-            <TextBlock Text="There is no upcoming events or tasks for you." x:Name="NoCalendarEventsLabel" Visibility="Collapsed" Margin="0 0 0 24"/>
-            <Grid>
-                <GridView HorizontalAlignment="Stretch" x:Name="CalendarEventsGridView" SelectionMode="None" Margin="0 8 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.IsHorizontalRailEnabled="False">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel/>
-
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="core:CalendarEvent">
-                            <controls:SettingsCard Header="{x:Bind Title}" Description="{x:Bind Description}"></controls:SettingsCard>
+            <TextBlock Text="There is no tasks for you." x:Name="NoToDoEventsLabel" Visibility="Collapsed" Margin="0 0 0 24"/>
+            <Grid HorizontalAlignment="Stretch">
+                <ListView HorizontalAlignment="Stretch" x:Name="ToDoEventsGridView" SelectionMode="None" Margin="-16 8 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.IsHorizontalRailEnabled="False">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="core:ToDoTask">
+                            <controls:SettingsCard Header="{x:Bind Title}" Description="{x:Bind Description}">
+                                <controls:SettingsCard.HeaderIcon>
+                                    <SymbolIcon Symbol="OutlineStar"/>
+                                </controls:SettingsCard.HeaderIcon>
+                                <CheckBox Content="Done" HorizontalAlignment="Right" IsChecked="{x:Bind IsCompleted}" Tag="{x:Bind Id}" Checked="OnTaskDoneChecked"/>
+                            </controls:SettingsCard>
                         </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
+                    </ListView.ItemTemplate>
+                </ListView>
             </Grid>
 
         </StackPanel>

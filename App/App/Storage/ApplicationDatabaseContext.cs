@@ -16,6 +16,7 @@ namespace App.Storage
 
         public DbSet<StickyNote> StickyNotes { get; set; }
         public DbSet<CalendarEvent> CalendarEvents { get; set; }
+        public DbSet<ToDoTask> ToDoTasks { get; set; }
 
         public ApplicationDatabaseContext()
         {

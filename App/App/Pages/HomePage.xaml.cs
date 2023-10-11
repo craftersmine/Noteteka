@@ -18,6 +18,7 @@ using Windows.Foundation.Collections;
 using Windows.UI;
 using App.Core;
 using App.Dialogs;
+using Microsoft.EntityFrameworkCore;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -34,6 +35,7 @@ namespace App
             this.InitializeComponent();
 
             UpdateNotesList();
+            UpdateToDoTasks();
             UpdateUpcomingTasks();
         }
 
@@ -102,22 +104,40 @@ namespace App
             }
         }
 
-        private void UpdateUpcomingTasks()
+        private void UpdateToDoTasks()
         {
-            CalendarEventsGridView.ItemsSource = null;
-            CalendarEventsGridView.Items.Clear();
+            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "New task", Description = "Test description" });
+            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "New task", Description = "Test description" });
+            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "Completed task", Description = "Test description that is completed", IsCompleted = true });
+            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "Old task", Description = "Test description for old", IsCompleted = true });
+            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "Old task", Description = "Test description for old" });
+            //App.DatabaseContext.SaveChanges();
 
-            if (App.DatabaseContext.CalendarEvents.Any())
+            ToDoEventsGridView.ItemsSource = null;
+            ToDoEventsGridView.Items.Clear();
+
+            if (App.DatabaseContext.ToDoTasks.Any())
             {
-                CalendarEventsGridView.Visibility = Visibility.Visible;
-                CalendarEventsGridView.ItemsSource = App.DatabaseContext.CalendarEvents;
-                NoCalendarEventsLabel.Visibility = Visibility.Collapsed;
+                ToDoEventsGridView.Visibility = Visibility.Visible;
+                ObservableCollection<ToDoTask> tasks = new ObservableCollection<ToDoTask>();
+                ToDoEventsGridView.ItemsSource = tasks;
+
+                foreach (ToDoTask task in App.DatabaseContext.ToDoTasks.Where(t => !t.IsCompleted).AsEnumerable())
+                {
+                    tasks.Add(task);
+                }
+                NoToDoEventsLabel.Visibility = Visibility.Collapsed;
             }
             else
             {
-                CalendarEventsGridView.Visibility = Visibility.Collapsed;
-                NoCalendarEventsLabel.Visibility = Visibility.Visible;
+                ToDoEventsGridView.Visibility = Visibility.Collapsed;
+                NoToDoEventsLabel.Visibility = Visibility.Visible;
             }
+        }
+
+        private void UpdateUpcomingTasks()
+        {
+
         }
 
         private void EditNoteClick(object sender, RoutedEventArgs e)
@@ -134,6 +154,19 @@ namespace App
             dlg.CloseButtonClick += (dialog, args) => dialog.Hide();
             dlg.PrimaryButtonClick += Dlg_PrimaryButtonClick;
             dlg.ShowAsync();
+        }
+
+        private void OnTaskDoneChecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox check = (CheckBox)sender;
+            int taskId = (int)check.Tag;
+
+            ToDoTask task = App.DatabaseContext.ToDoTasks.FirstOrDefault(n => n.Id == taskId);
+            task.IsCompleted = check.IsChecked ?? false;
+            App.DatabaseContext.ToDoTasks.Entry(task).State = EntityState.Modified;
+            App.DatabaseContext.SaveChanges();
+
+            UpdateToDoTasks();
         }
     }
 }
