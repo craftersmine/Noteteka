@@ -23,6 +23,7 @@
 	  <None Remove="Pages\CalendarPage.xaml" />
 	  <None Remove="Pages\NotesPage.xaml" />
 	  <None Remove="Pages\SettingsPage.xaml" />
+	  <None Remove="Pages\ToDoTasksPage.xaml" />
 	  <None Remove="UserControl1.xaml" />
 	</ItemGroup>
 
@@ -38,8 +39,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.0.230907" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.11" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.12" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.231008000" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
 		<PackageReference Include="WinUIEx" Version="2.3.1" />
 		<Manifest Include="$(ApplicationManifest)" />
@@ -61,6 +62,11 @@
 	<ItemGroup>
 	  <Folder Include="Assets\Icons\" />
 	  <Folder Include="Controls\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Pages\ToDoTasksPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Pages\NotesPage.xaml">

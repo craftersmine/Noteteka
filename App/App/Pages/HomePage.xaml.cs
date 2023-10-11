@@ -39,6 +39,14 @@ namespace App
             UpdateUpcomingTasks();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            UpdateNotesList();
+            UpdateToDoTasks();
+            UpdateUpcomingTasks();
+            base.OnNavigatedTo(e);
+        }
+
         private void AddNote(object sender, RoutedEventArgs e)
         {
             ContentDialog dlg = new ContentDialog();
@@ -122,11 +130,18 @@ namespace App
                 ObservableCollection<ToDoTask> tasks = new ObservableCollection<ToDoTask>();
                 ToDoEventsGridView.ItemsSource = tasks;
 
-                foreach (ToDoTask task in App.DatabaseContext.ToDoTasks.Where(t => !t.IsCompleted).AsEnumerable())
+                foreach (ToDoTask task in App.DatabaseContext.ToDoTasks.Where(t => !t.IsCompleted))
                 {
                     tasks.Add(task);
                 }
-                NoToDoEventsLabel.Visibility = Visibility.Collapsed;
+
+                if (tasks.Any())
+                    NoToDoEventsLabel.Visibility = Visibility.Collapsed;
+                else
+                {
+                    ToDoEventsGridView.Visibility = Visibility.Collapsed;
+                    NoToDoEventsLabel.Visibility = Visibility.Visible;
+                }
             }
             else
             {

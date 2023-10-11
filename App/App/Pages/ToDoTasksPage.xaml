@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="App.Pages.ToDoTasksPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:core="using:App.Core"
+    mc:Ignorable="d" Tag="Tasks to do" x:Name="ToDoTasksPageRoot">
+
+    <Grid>
+        <TextBlock Text="There is no tasks for you." x:Name="NoToDoEventsLabel" Visibility="Collapsed" Margin="0 0 0 24"/>
+        <Grid HorizontalAlignment="Stretch">
+            <ListView HorizontalAlignment="Stretch" x:Name="ToDoEventsGridView" SelectionMode="None" Margin="-16 8 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.IsHorizontalRailEnabled="False">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="core:ToDoTask">
+                        <controls:SettingsCard Header="{x:Bind Title}" Description="{x:Bind Description}">
+                            <controls:SettingsCard.HeaderIcon>
+                                <SymbolIcon Symbol="OutlineStar"/>
+                            </controls:SettingsCard.HeaderIcon>
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Priority: " FontSize="12pt" VerticalAlignment="Center" Margin="0 0 16 0"></TextBlock>
+                                    <ComboBox SelectedItem="{x:Bind Priority}" ItemsSource="{Binding ElementName=ToDoTasksPageRoot, Path=Priorities}" Tag="{x:Bind Id}" SelectionChanged="OnTaskPriorityChanged"/>
+                                </StackPanel>
+                                <CheckBox Content="Done" HorizontalAlignment="Right" IsChecked="{x:Bind IsCompleted}" Tag="{x:Bind Id}" Click="OnTaskDoneChecked"/>
+                            </StackPanel>
+                        </controls:SettingsCard>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>
