@@ -21,6 +21,7 @@
 	  <None Remove="HomePage.xaml" />
 	  <None Remove="Icons.xaml" />
 	  <None Remove="Pages\CalendarPage.xaml" />
+	  <None Remove="Pages\NotesPage.xaml" />
 	  <None Remove="Pages\SettingsPage.xaml" />
 	  <None Remove="UserControl1.xaml" />
 	</ItemGroup>
@@ -60,6 +61,11 @@
 	<ItemGroup>
 	  <Folder Include="Assets\Icons\" />
 	  <Folder Include="Controls\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Pages\NotesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Pages\SettingsPage.xaml">

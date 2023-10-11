@@ -51,6 +51,7 @@ namespace App
                     NavigateTo<CalendarPage>();
                     break;
                 case "notes":
+                    NavigateTo<NotesPage>();
                     break;
                 case "notebook":
                     break;
