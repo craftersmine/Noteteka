@@ -54,6 +54,8 @@ namespace App
                     break;
                 case "notebook":
                     break;
+                case "tasks":
+                    break;
                 case "settings":
                     NavigateTo<SettingsPage>();
                     break;
