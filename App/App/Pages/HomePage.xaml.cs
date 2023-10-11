@@ -150,7 +150,7 @@ namespace App
             dlg.Title = "Edit note";
             dlg.Content = dlgContent;
             dlg.CloseButtonText = "Cancel";
-            dlg.PrimaryButtonText = "Add";
+            dlg.PrimaryButtonText = "Edit";
             dlg.CloseButtonClick += (dialog, args) => dialog.Hide();
             dlg.PrimaryButtonClick += Dlg_PrimaryButtonClick;
             dlg.ShowAsync();
