@@ -23,7 +23,8 @@
 	  <None Remove="Assets\Licenses\SQLite_LICENSE.txt" />
 	  <None Remove="Assets\Licenses\WinUI3_LICENSE.txt" />
 	  <None Remove="Assets\Licenses\WinUIEx_LICENSE.txt" />
-	  <None Remove="Dialogs\AddNoteDialog.xaml" />
+	  <None Remove="Dialogs\AddEditNoteDialog.xaml" />
+	  <None Remove="Dialogs\AddEditTaskDialog.xaml" />
 	  <None Remove="HomePage.xaml" />
 	  <None Remove="Icons.xaml" />
 	  <None Remove="Pages\CalendarPage.xaml" />
@@ -67,7 +68,9 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Assets\Icons\" />
+	  <Folder Include="Attrubutes\" />
 	  <Folder Include="Controls\" />
+	  <Folder Include="Converters\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Update="Assets\Licenses\CommunityToolkit_LICENSE.txt">
@@ -90,6 +93,11 @@
 	  </Content>
 	</ItemGroup>
 	<ItemGroup>
+	  <Page Update="Dialogs\AddEditTaskDialog.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
 	  <Page Update="Pages\ToDoTasksPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
@@ -110,7 +118,7 @@
 	  </Page>
 	</ItemGroup>
 	<ItemGroup>
-	  <Page Update="Dialogs\AddNoteDialog.xaml">
+	  <Page Update="Dialogs\AddEditNoteDialog.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
