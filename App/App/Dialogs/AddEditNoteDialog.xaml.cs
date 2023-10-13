@@ -22,14 +22,14 @@ namespace App.Dialogs
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AddNoteDialog : Page
+    public sealed partial class AddEditNoteDialog : Page
     {
         public string NoteText => NoteTextTextBox.Text;
         public StickyNoteColor Color => ColorComboBox.SelectedItem as StickyNoteColor;
         public bool IsEditing { get; }
         public StickyNote? StickyNote { get; }
 
-        public AddNoteDialog(StickyNote? note)
+        public AddEditNoteDialog(StickyNote? note)
         {
             this.InitializeComponent();
 

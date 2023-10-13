@@ -60,7 +60,7 @@ namespace App.Pages
         private void AddNote(object sender, RoutedEventArgs e)
         {
             ContentDialog dlg = new ContentDialog();
-            AddNoteDialog dlgContent = new AddNoteDialog(null);
+            AddEditNoteDialog dlgContent = new AddEditNoteDialog(null);
             dlg.XamlRoot = this.XamlRoot;
             dlg.Title = "Add new note";
             dlg.Content = dlgContent;
@@ -73,7 +73,7 @@ namespace App.Pages
 
         private async void Dlg_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            AddNoteDialog dlgContent = (AddNoteDialog)sender.Content;
+            AddEditNoteDialog dlgContent = (AddEditNoteDialog)sender.Content;
 
             if (!dlgContent.IsEditing)
             {
@@ -109,7 +109,7 @@ namespace App.Pages
             ContentDialog dlg = new ContentDialog();
 
             StickyNote note = App.DatabaseContext.StickyNotes.First(n => n.Id == (int)((Button)sender).Tag);
-            AddNoteDialog dlgContent = new AddNoteDialog(note);
+            AddEditNoteDialog dlgContent = new AddEditNoteDialog(note);
             dlg.XamlRoot = this.XamlRoot;
             dlg.Title = "Edit note";
             dlg.Content = dlgContent;
