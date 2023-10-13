@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace App.Core
 {
@@ -16,11 +20,11 @@ namespace App.Core
         public string Description { get; set; }
         public bool IsCompleted { get; set; }
     }
-
+    
     public enum ToDoTaskPriority
     {
-        HighPriority = 1,
-        NormalPriority = 0,
-        LowPriority = -1
+        High = 1,
+        Normal = 0,
+        Low = -1
     }
 }
