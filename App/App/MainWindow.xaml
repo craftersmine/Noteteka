@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winUiEx="using:WinUIEx"
     mc:Ignorable="d"
-    Title="YourNote">
+    Title="YourNote" MinWidth="450">
     <winUiEx:WindowEx.SystemBackdrop>
         <MicaBackdrop Kind="Base"/>
     </winUiEx:WindowEx.SystemBackdrop>
