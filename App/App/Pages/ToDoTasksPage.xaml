@@ -8,22 +8,41 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
     xmlns:core="using:App.Core"
+    xmlns:converters="using:App.Converters"
     mc:Ignorable="d" Tag="Tasks to do" x:Name="ToDoTasksPageRoot">
-
     <Grid>
-        <TextBlock Text="There is no tasks for you." x:Name="NoToDoEventsLabel" Visibility="Collapsed" Margin="0 0 0 24"/>
-        <Grid HorizontalAlignment="Stretch">
-            <ListView HorizontalAlignment="Stretch" x:Name="ToDoEventsGridView" SelectionMode="None" Margin="-16 8 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.IsHorizontalRailEnabled="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" Click="AddTaskClick" ToolTipService.ToolTip="Add new task...">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Symbol="Add"/>
+                    <TextBlock Text="Add new task" Margin="8 0 0 0"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <TextBlock Grid.Row="1" Text="There is no tasks for you." x:Name="NoToDoEventsLabel" Visibility="Collapsed" Margin="0 0 0 24"/>
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch">
+            <ListView HorizontalAlignment="Stretch" x:Name="ToDoEventsGridView" SelectionMode="None" Margin="-16 8 0 8" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.IsHorizontalRailEnabled="False">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="core:ToDoTask">
                         <controls:SettingsCard Header="{x:Bind Title}" Description="{x:Bind Description}">
+                            <controls:SettingsCard.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Delete" Icon="Delete" Click="ContextDeleteClick" Tag="{x:Bind Id}"/>
+                                    <MenuFlyoutItem Text="Edit" Icon="Edit" Click="ContextEditClick" Tag="{x:Bind Id}"/>
+                                </MenuFlyout>
+                            </controls:SettingsCard.ContextFlyout>
                             <controls:SettingsCard.HeaderIcon>
                                 <SymbolIcon Symbol="OutlineStar"/>
                             </controls:SettingsCard.HeaderIcon>
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Priority: " FontSize="12pt" VerticalAlignment="Center" Margin="0 0 16 0"></TextBlock>
-                                    <ComboBox SelectedItem="{x:Bind Priority}" ItemsSource="{Binding ElementName=ToDoTasksPageRoot, Path=Priorities}" Tag="{x:Bind Id}" SelectionChanged="OnTaskPriorityChanged"/>
+                                    <ComboBox SelectedItem="{x:Bind Priority}" DropDownClosed="OnPriorityComboboxClosed" ItemsSource="{Binding ElementName=ToDoTasksPageRoot, Path=Priorities}" Tag="{x:Bind Id}"/>
                                 </StackPanel>
                                 <CheckBox Content="Done" HorizontalAlignment="Right" IsChecked="{x:Bind IsCompleted}" Tag="{x:Bind Id}" Click="OnTaskDoneChecked"/>
                             </StackPanel>
