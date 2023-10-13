@@ -17,6 +17,12 @@
 		<AssemblyName>YourNote</AssemblyName>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Assets\Licenses\CommunityToolkit_LICENSE.txt" />
+	  <None Remove="Assets\Licenses\EntityFramework_LICENSE.txt" />
+	  <None Remove="Assets\Licenses\FluentIcons_LICENSE.txt" />
+	  <None Remove="Assets\Licenses\SQLite_LICENSE.txt" />
+	  <None Remove="Assets\Licenses\WinUI3_LICENSE.txt" />
+	  <None Remove="Assets\Licenses\WinUIEx_LICENSE.txt" />
 	  <None Remove="Dialogs\AddNoteDialog.xaml" />
 	  <None Remove="HomePage.xaml" />
 	  <None Remove="Icons.xaml" />
@@ -62,6 +68,26 @@
 	<ItemGroup>
 	  <Folder Include="Assets\Icons\" />
 	  <Folder Include="Controls\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="Assets\Licenses\CommunityToolkit_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Licenses\EntityFramework_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Licenses\FluentIcons_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Licenses\SQLite_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Licenses\WinUI3_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Licenses\WinUIEx_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Pages\ToDoTasksPage.xaml">

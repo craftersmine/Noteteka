@@ -37,6 +37,11 @@ namespace App
 
         public static bool DatabaseRestored { get; private set; }
 
+        public static Version CurrentVersion => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+
+        public static string CurrentVersionString => string.Format("v{1}.{2}.{3}", CurrentVersion.Major,
+            CurrentVersion.Minor, CurrentVersion.Revision);
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
