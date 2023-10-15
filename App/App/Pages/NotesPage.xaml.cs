@@ -68,6 +68,7 @@ namespace App.Pages
             dlg.PrimaryButtonText = "Add";
             dlg.CloseButtonClick += (dialog, args) => dialog.Hide();
             dlg.PrimaryButtonClick += Dlg_PrimaryButtonClick;
+            dlg.IsPrimaryButtonEnabled = false;
             dlg.ShowAsync();
         }
 

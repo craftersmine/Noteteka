@@ -41,5 +41,13 @@ namespace App.Dialogs
                 IsEditing = true;
             }
         }
+
+        private void OnNoteTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (NoteTextTextBox.Text.Length > 0)
+                ((ContentDialog)Parent).IsPrimaryButtonEnabled = true;
+            else
+                ((ContentDialog)Parent).IsPrimaryButtonEnabled = false;
+        }
     }
 }

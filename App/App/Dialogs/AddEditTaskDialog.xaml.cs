@@ -56,5 +56,13 @@ namespace App.Dialogs
                 TaskPriorityComboBox.SelectedItem = ToDoTask.Priority;
             }
         }
+
+        private void OnTaskTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (TaskTitleTextBox.Text.Length > 0 && TaskDescriptionTextBox.Text.Length > 0)
+                ((ContentDialog)Parent).IsPrimaryButtonEnabled = true;
+            else
+                ((ContentDialog)Parent).IsPrimaryButtonEnabled = false;
+        }
     }
 }
