@@ -29,9 +29,9 @@ namespace App.Dialogs
     {
         public ObservableCollection<ToDoTaskPriority> Priorities { get; private set; } = new ObservableCollection<ToDoTaskPriority>();
 
-        public string TaskTitle => ToDoTask?.Title;
-        public string TaskDescription => ToDoTask?.Description;
-        public ToDoTaskPriority TaskPriority => ToDoTask is not null ? ToDoTask.Priority : ToDoTaskPriority.Normal;
+        public string TaskTitle => TaskTitleTextBox.Text;
+        public string TaskDescription => TaskDescriptionTextBox.Text;
+        public ToDoTaskPriority TaskPriority => TaskPriorityComboBox.SelectedItem is not null ? (ToDoTaskPriority)TaskPriorityComboBox.SelectedItem : ToDoTaskPriority.Normal;
 
         public bool IsEditing { get; private set; }
 

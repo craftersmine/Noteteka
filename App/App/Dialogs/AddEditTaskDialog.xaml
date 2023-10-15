@@ -14,8 +14,8 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" PlaceholderText="Task title" Text="{x:Bind TaskTitle}" x:Name="TaskTitleTextBox"/>
-        <TextBox Grid.Row="1" PlaceholderText="Task description" Text="{x:Bind TaskDescription}" x:Name="TaskDescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" MaxHeight="150" Margin="0 8 0 0"/>
+        <TextBox Grid.Row="0" PlaceholderText="Task title" x:Name="TaskTitleTextBox"/>
+        <TextBox Grid.Row="1" PlaceholderText="Task description" x:Name="TaskDescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" MaxHeight="150" Margin="0 8 0 0"/>
         <ComboBox Grid.Row="2" PlaceholderText="Priority" SelectedIndex="0" ItemsSource="{x:Bind Priorities}"  x:Name="TaskPriorityComboBox" HorizontalAlignment="Stretch" Margin="0 8 0 0"/>
     </Grid>
 </Page>

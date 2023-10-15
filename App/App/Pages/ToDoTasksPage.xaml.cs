@@ -64,13 +64,6 @@ namespace App.Pages
 
         private void UpdateToDoTasks()
         {
-            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "New task", Description = "Test description" });
-            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "New task", Description = "Test description" });
-            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "Completed task", Description = "Test description that is completed", IsCompleted = true });
-            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "Old task", Description = "Test description for old", IsCompleted = true });
-            //App.DatabaseContext.ToDoTasks.Add(new ToDoTask() { Title = "Old task", Description = "Test description for old" });
-            //App.DatabaseContext.SaveChanges();
-
             ToDoEventsGridView.ItemsSource = null;
             ToDoEventsGridView.Items.Clear();
 
@@ -78,7 +71,6 @@ namespace App.Pages
             {
                 App.DatabaseContext.SaveChanges();
                 ToDoEventsGridView.Visibility = Visibility.Visible;
-                //List<ToDoTask> tasks = App.DatabaseContext.ToDoTasks.ToList();
                 ToDoEventsGridView.ItemsSource = App.DatabaseContext.ToDoTasks.OrderByDescending(t => t.Priority).ToList();
                 NoToDoEventsLabel.Visibility = Visibility.Collapsed;
             }
@@ -98,7 +90,7 @@ namespace App.Pages
 
             if (task.Priority != (ToDoTaskPriority)comboBox.SelectedItem)
             {
-                //task.Priority = (ToDoTaskPriority)comboBox.SelectedItem;
+                task.Priority = (ToDoTaskPriority)comboBox.SelectedItem;
                 App.DatabaseContext.ToDoTasks.Entry(task).State = EntityState.Modified;
                 App.DatabaseContext.SaveChanges();
 
