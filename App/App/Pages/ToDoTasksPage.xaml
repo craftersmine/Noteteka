@@ -24,7 +24,7 @@
                 </StackPanel>
             </Button.Content>
         </Button>
-        <TextBlock Grid.Row="1" Text="There is no tasks for you." x:Name="NoToDoEventsLabel" Visibility="Collapsed" Margin="0 0 0 24"/>
+        <TextBlock Grid.Row="1" Text="There is no tasks for you. All done!" x:Name="NoToDoEventsLabel" Visibility="Collapsed" Margin="0 24 0 24"/>
         <Grid Grid.Row="1" HorizontalAlignment="Stretch">
             <ListView HorizontalAlignment="Stretch" x:Name="ToDoEventsGridView" SelectionMode="None" Margin="-16 8 0 8" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.IsHorizontalRailEnabled="False">
                 <ListView.ItemTemplate>

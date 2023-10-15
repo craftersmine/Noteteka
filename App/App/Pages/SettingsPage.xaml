@@ -29,7 +29,7 @@
                 </Button>
             </controls:SettingsCard>
             
-            <TextBlock Text="About" FontWeight="SemiBold" Margin="0 0 0 8"/>
+            <TextBlock Text="About" FontWeight="SemiBold" Margin="0 8 0 8"/>
             <controls:SettingsCard Header="About">
                 <controls:SettingsCard.HeaderIcon>
                     <SymbolIcon Symbol="ContactInfo"/>
