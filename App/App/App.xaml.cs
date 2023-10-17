@@ -9,17 +9,20 @@ using Microsoft.UI.Xaml.Shapes;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-
+using System.Threading;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
+using App.Core;
 using App.Storage;
 using Path = System.IO.Path;
+using Timer = System.Timers.Timer;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -42,12 +45,21 @@ namespace App
         public static string CurrentVersionString => string.Format("v{1}.{2}.{3}", CurrentVersion.Major,
             CurrentVersion.Minor, CurrentVersion.Revision);
 
+        public static NotificationService NotificationService { get; private set; }
+
+        public static Timer EventTimer { get; private set; }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+
+            EventTimer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds);
+
             this.InitializeComponent();
         }
 
@@ -87,6 +99,10 @@ namespace App
             }
 
             m_window = new MainWindow();
+            EventTimer.Start();
+
+            NotificationService = new NotificationService();
+
             m_window.Activate();
         }
 
