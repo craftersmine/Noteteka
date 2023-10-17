@@ -25,7 +25,7 @@
                 </Button>
             </Grid>
 
-            <TextBlock Text="There is no sticky notes for you." x:Name="NoNotesLabel" Visibility="Collapsed" Margin="0 0 0 24"/>
+            <TextBlock Text="There is no sticky notes for you." x:Name="NoNotesLabel" Visibility="Collapsed" Margin="0 16 0 24"/>
             <GridView x:Name="NotesGridView" SelectionMode="None" Margin="0 8 0 0" Height="265" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -81,14 +81,9 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Tasks to do" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                <Button Grid.Column="1">
-                    <Button.Content>
-                        <SymbolIcon Symbol="Add"/>
-                    </Button.Content>
-                </Button>
             </Grid>
 
-            <TextBlock Text="There is no tasks for you." x:Name="NoToDoEventsLabel" Visibility="Collapsed" Margin="0 0 0 24"/>
+            <TextBlock Text="There is no tasks for you." x:Name="NoToDoEventsLabel" Visibility="Collapsed" Margin="0 16 0 24"/>
             <Grid HorizontalAlignment="Stretch" MaxHeight="450">
                 <ListView HorizontalAlignment="Stretch" x:Name="ToDoEventsGridView" SelectionMode="None" Margin="-16 8 0 0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.IsHorizontalRailEnabled="False">
                     <ListView.ItemTemplate>
