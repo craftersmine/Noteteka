@@ -145,6 +145,7 @@ namespace App.Pages
         private void ContextDeleteClick(object sender, RoutedEventArgs e)
         {
             MenuFlyoutItem item = sender as MenuFlyoutItem;
+            // TODO: implement task deletion
         }
 
         private void ContextEditClick(object sender, RoutedEventArgs e)
