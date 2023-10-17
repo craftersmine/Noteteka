@@ -14,10 +14,12 @@ namespace App.Core
         public DateTime EventDateTime { get; set; }
         public DayOfWeek[] RepeatOnDays { get; set; }
         public TimeSpan RepeatEvery { get; set; }
+        public TimeSpan RemindBefore { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public bool IsRepeating { get; set; }
         public bool IsDone { get; set; }
+        public bool IsNotificationShown { get; set; }
 
         public CalendarEvent()
         {
@@ -25,8 +27,19 @@ namespace App.Core
             Description = "New event";
         }
 
+        public void OnNotificationShown()
+        {
+            IsNotificationShown = true;
+        }
+
         public void OnEventOccurred()
         {
+            if (!IsRepeating)
+            {
+                IsDone = true;
+                return;
+            }
+
             if (RepeatOnDays.Length == 1)
             {
                 EventDateTime = Utilities.GetNextWeekday(DateTime.Now.AddDays(1), RepeatOnDays[0]) + RepeatEvery;
