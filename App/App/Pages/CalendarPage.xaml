@@ -6,9 +6,41 @@
     xmlns:local="using:App.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="using:App.Core"
     mc:Ignorable="d" Tag="Calendar">
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <AppBarButton Label="Add Event..." Icon="Add"/>
+            <AppBarSeparator/>
+            <AppBarButton Label="Edit..." Icon="Edit"/>
+            <AppBarButton Label="Remove" Icon="Delete"/>
+            <AppBarSeparator/>
+            <AppBarButton Label="Sync" Icon="Sync" Click="OnSyncClick"/>
+        </StackPanel>
+        <ListView Grid.Row="1" x:Name="CalendarEventsListBox">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="core:CalendarEvent">
+                    <Grid Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Bind EventDateTime.ToShortDateString()}" VerticalAlignment="Center" FontSize="10pt" Margin="0 0 16 0"/>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{x:Bind EventDateTime.ToShortTimeString()}" VerticalAlignment="Center" FontSize="10pt" Margin="0 0 16 0"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{x:Bind Title}" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind Description}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
