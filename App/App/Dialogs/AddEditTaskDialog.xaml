@@ -12,10 +12,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBox Grid.Row="0" PlaceholderText="Task title" x:Name="TaskTitleTextBox" TextChanged="OnTaskTextChanged"/>
         <TextBox Grid.Row="1" PlaceholderText="Task description" x:Name="TaskDescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" MaxHeight="150" Margin="0 8 0 0" TextChanged="OnTaskTextChanged"/>
-        <ComboBox Grid.Row="2" PlaceholderText="Priority" SelectedIndex="0" ItemsSource="{x:Bind Priorities}"  x:Name="TaskPriorityComboBox" HorizontalAlignment="Stretch" Margin="0 8 0 0"/>
+        <TextBlock Grid.Row="2" Text="Priority:" Margin="0 8 0 0"/>
+        <ComboBox Grid.Row="3" PlaceholderText="Priority" SelectedIndex="0" ItemsSource="{x:Bind Priorities}"  x:Name="TaskPriorityComboBox" HorizontalAlignment="Stretch" Margin="0 8 0 0"/>
     </Grid>
 </Page>
