@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="App.Dialogs.AddEditCalendarEventDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App.Dialogs"
+    xmlns:ctoolkit="using:CommunityToolkit.WinUI.Controls"
+    xmlns:system="using:System"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:CommunityToolkit.WinUI.Converters"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <system:TimeSpan x:Key="EveryWeek">7.00:00:00</system:TimeSpan>
+        <system:TimeSpan x:Key="Every2Weeks">14.00:00:00</system:TimeSpan>
+        <system:TimeSpan x:Key="EveryMonth">30.00:00:00</system:TimeSpan>
+    </Page.Resources>
+
+    <StackPanel>
+        <TextBox PlaceholderText="Title" TextChanged="OnTextChanged" x:Name="TitleTextBox"/>
+        <TextBox PlaceholderText="Description" AcceptsReturn="True" TextWrapping="Wrap" MaxHeight="150" Margin="0 8 0 0" TextChanged="OnTextChanged" x:Name="DescriptionTextBox"/>
+        <DatePicker HorizontalAlignment="Stretch" Header="Occurs on" Margin="0 8 0 0" x:Name="OccursOnDatePicker"/>
+        <TimePicker HorizontalAlignment="Stretch" Header="Occurs at" Margin="0 8 0 0" x:Name="OccursAtTimePicker"/>
+        <TimePicker HorizontalAlignment="Stretch" Header="Remind before" Margin="0 8 0 0" x:Name="RemindBeforeTimePicker"/>
+        <ToggleSwitch OffContent="Don't repeat" OnContent="Repeat on" x:Name="RepeatToggle" Toggled="OnRepeatToggled"/>
+        <StackPanel x:Name="RepeatProperties" Visibility="{Binding ElementName=RepeatToggle, Path=IsOn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+            <ctoolkit:Segmented SelectionMode="Multiple" x:Name="RepeatOnDays" SelectionChanged="OnRepeatDaysSelectionChanged" HorizontalAlignment="Stretch">
+                <ctoolkit:SegmentedItem Content="Mon" Tag="1" ToolTipService.ToolTip="Monday"/>
+                <ctoolkit:SegmentedItem Content="Tue" Tag="2" ToolTipService.ToolTip="Tuesday"/>
+                <ctoolkit:SegmentedItem Content="Wed" Tag="3" ToolTipService.ToolTip="Wednesday"/>
+                <ctoolkit:SegmentedItem Content="Thu" Tag="4" ToolTipService.ToolTip="Thursday"/>
+                <ctoolkit:SegmentedItem Content="Fri" Tag="5" ToolTipService.ToolTip="Friday"/>
+                <ctoolkit:SegmentedItem Content="Sat" Tag="6" ToolTipService.ToolTip="Saturday"/>
+                <ctoolkit:SegmentedItem Content="Sun" Tag="0" ToolTipService.ToolTip="Sunday"/>
+            </ctoolkit:Segmented>
+            <ComboBox Header="Repeat every" Margin="0 8 0 0" SelectedIndex="0" HorizontalAlignment="Stretch" x:Name="RepeatEveryComboBox">
+            </ComboBox>
+        </StackPanel>
+    </StackPanel>
+</Page>
