@@ -6,19 +6,24 @@
     xmlns:local="using:App.Pages"
     xmlns:ui="using:CommunityToolkit.WinUI"
     xmlns:root="using:App"
+    xmlns:core="using:App.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d" Tag="Settings">
     <Page.Resources>
         <Style TargetType="TextBlock" x:Key="SettingsSectionHeaderStyle">
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Margin" Value="1,30,0,6"/>
         </Style>
+        <converters:EmptyObjectToObjectConverter x:Key="NullToBoolConverter"/>
     </Page.Resources>
 
     <ScrollViewer>
         <StackPanel Margin="0 0 16 0">
+            <InfoBar IsOpen="{x:Bind core:ApplicationSettingsManager.Instance.LastException, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}" Content="Test"/>
+
             <TextBlock Text="Database management" Style="{StaticResource SettingsSectionHeaderStyle}"/>
             <controls:SettingsCard Header="Database purge" Description="Purge whole application database. This can fix a bunch of problems with data loading, but you will lose all your data!">
                 <controls:SettingsCard.HeaderIcon>
