@@ -49,15 +49,15 @@ namespace App
 
         public static Timer EventTimer { get; private set; }
 
+        public static bool ColdStart { get; set; }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-
+            ColdStart = true;
             EventTimer = new Timer(TimeSpan.FromSeconds(10).TotalMilliseconds);
 
             this.InitializeComponent();
@@ -98,10 +98,12 @@ namespace App
                 DatabaseContext = new ApplicationDatabaseContext();
             }
 
+            NotificationService = new NotificationService();
+
             m_window = new MainWindow();
             EventTimer.Start();
 
-            NotificationService = new NotificationService();
+            NotificationService.UpdateCalendarEvents();
 
             m_window.Activate();
         }
