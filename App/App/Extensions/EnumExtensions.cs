@@ -10,6 +10,8 @@ namespace App.Extensions
     {
         public static T[] FromCommaSeparatedString<T>(this string value)
         {
+            if (string.IsNullOrWhiteSpace(value))
+                return Array.Empty<T>();
             return value.Split(new[] { ',' })
                 .Select(e => Enum.Parse(typeof(T), e))
                 .Cast<T>()
