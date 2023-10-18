@@ -47,7 +47,7 @@ namespace App.Pages
             App.DatabaseContext.SaveChanges();
         }
 
-        private void UpdateCalendarEvents()
+        private void UpdateCalendarEvents(FilterType filter)
         {
             CalendarEventsListBox.ItemsSource = null;
             CalendarEventsListBox.Items.Clear();
@@ -66,7 +66,7 @@ namespace App.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SwitchEnabled(false);
-            UpdateCalendarEvents();
+            UpdateCalendarEvents(FilterType.AllEvents);
             base.OnNavigatedTo(e);
         }
 
@@ -121,7 +121,7 @@ namespace App.Pages
             await App.DatabaseContext.SaveChangesAsync();
             sender.PrimaryButtonClick -= AddEditPrimaryButtonClick;
 
-            UpdateCalendarEvents();
+            UpdateCalendarEvents(FilterType.AllEvents);
         }
 
         private async void OnEditEventClick(object sender, RoutedEventArgs e)
@@ -153,6 +153,7 @@ namespace App.Pages
         {
             EditButton.IsEnabled = value;
             RemoveButton.IsEnabled = value;
+            DoneButton.IsEnabled = value;
         }
 
         private async void OnDeleteEventClick(object sender, RoutedEventArgs e)
@@ -164,7 +165,20 @@ namespace App.Pages
             App.DatabaseContext.CalendarEvents.Remove(evt);
             await App.DatabaseContext.SaveChangesAsync();
 
-            UpdateCalendarEvents();
+            UpdateCalendarEvents(FilterType.AllEvents);
         }
+
+        private void OnFilterVariantSelected(object sender, RoutedEventArgs e)
+        {
+            UpdateCalendarEvents((FilterType)int.Parse(((RadioMenuFlyoutItem)sender).Tag.ToString()));
+        }
+    }
+
+    public enum FilterType
+    {
+        AllEvents,
+        Today,
+        TodayOneWeek,
+        TodayOneMonth
     }
 }

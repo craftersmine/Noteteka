@@ -31,11 +31,16 @@
             <AppBarSeparator/>
             <AppBarButton Label="Sync" Icon="Sync" Click="OnSyncClick" Visibility="Collapsed" ToolTipService.ToolTip="Synchronize events with remote calendar"/>
             <AppBarSeparator Visibility="Collapsed"/>
-            <AppBarButton Label="Done" Icon="Accept" ToolTipService.ToolTip="Mark event as done"/>
+            <AppBarButton Label="Done" Icon="Accept" ToolTipService.ToolTip="Mark event as done" x:Name="DoneButton"/>
             <AppBarSeparator Visibility="Visible"/>
             <AppBarButton Label="Show..." Icon="Filter" ToolTipService.ToolTip="Select what events to show">
                 <AppBarButton.Flyout>
-                    <MenuFlyout></MenuFlyout>
+                    <MenuFlyout x:Name="FilterFlyout">
+                        <RadioMenuFlyoutItem Text="All events" IsChecked="True" Click="OnFilterVariantSelected"/>
+                        <RadioMenuFlyoutItem Text="Today"/>
+                        <RadioMenuFlyoutItem Text="Today and one week"/>
+                        <RadioMenuFlyoutItem Text="Today and one month"/>
+                    </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
         </StackPanel>
