@@ -33,10 +33,19 @@ namespace App.Core
             if (!File.Exists(SettingsFilePath))
                 CreateSettings();
 
-            if (!ValidateSettings())
+            LoadSettings();
+
+            if (LastException is not null)
                 RecreateSettings();
 
             LoadSettings();
+
+            Settings.PropertyChanged += Settings_PropertyChanged;
+        }
+
+        private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            SaveSettings();
         }
 
         public void CreateSettings()
@@ -76,6 +85,11 @@ namespace App.Core
                 Settings = new ApplicationSettings();
         }
 
+        public void SaveSettings()
+        {
+            SerializeSettings();
+        }
+
         private ApplicationSettings? DeserializeSettings()
         {
             try
@@ -96,7 +110,7 @@ namespace App.Core
         {
             try
             {
-                using (FileStream settingsFileStream = File.Open(SettingsFilePath, FileMode.OpenOrCreate))
+                using (FileStream settingsFileStream = File.Open(SettingsFilePath, FileMode.Create))
                 {
                     serializer.Serialize(settingsFileStream, Settings);
                 }
