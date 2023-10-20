@@ -7,7 +7,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:core="using:App.Core"
+    xmlns:converters="using:CommunityToolkit.WinUI.Converters"
     mc:Ignorable="d" Tag="Calendar">
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -31,15 +35,17 @@
             <AppBarSeparator/>
             <AppBarButton Label="Sync" Icon="Sync" Click="OnSyncClick" Visibility="Collapsed" ToolTipService.ToolTip="Synchronize events with remote calendar"/>
             <AppBarSeparator Visibility="Collapsed"/>
-            <AppBarButton Label="Done" Icon="Accept" ToolTipService.ToolTip="Mark event as done" x:Name="DoneButton"/>
+            <AppBarButton Label="Done" Icon="Accept" ToolTipService.ToolTip="Mark event as done" x:Name="DoneButton" Click="OnDoneClick"/>
             <AppBarSeparator Visibility="Visible"/>
             <AppBarButton Label="Show..." Icon="Filter" ToolTipService.ToolTip="Select what events to show">
                 <AppBarButton.Flyout>
                     <MenuFlyout x:Name="FilterFlyout">
-                        <RadioMenuFlyoutItem Text="All events" IsChecked="True" Click="OnFilterVariantSelected"/>
-                        <RadioMenuFlyoutItem Text="Today"/>
-                        <RadioMenuFlyoutItem Text="Today and one week"/>
-                        <RadioMenuFlyoutItem Text="Today and one month"/>
+                        <RadioMenuFlyoutItem Text="All events" Tag="1" IsChecked="True" Click="OnFilterVariantSelected"/>
+                        <RadioMenuFlyoutItem Text="Today" Tag="2" Click="OnFilterVariantSelected"/>
+                        <RadioMenuFlyoutItem Text="Today and one week" Tag="3" Click="OnFilterVariantSelected"/>
+                        <RadioMenuFlyoutItem Text="Today and one month" Tag="4" Click="OnFilterVariantSelected"/>
+                        <MenuFlyoutSeparator/>
+                        <ToggleMenuFlyoutItem Text="Show done events" Click="OnShowDoneFilterEnabled"/>
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
@@ -58,7 +64,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Bind EventDateTime.ToShortDateString()}" VerticalAlignment="Center" FontSize="10pt" Margin="0 0 16 0"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="{x:Bind EventDateTime.ToShortTimeString()}" VerticalAlignment="Center" FontSize="10pt" Margin="0 0 16 0"/>
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{x:Bind Title}" FontWeight="SemiBold"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" FontWeight="SemiBold" Text="{x:Bind Title}"/>
                         <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind Description}"/>
                     </Grid>
                 </DataTemplate>

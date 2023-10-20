@@ -47,17 +47,45 @@ namespace App.Pages
             App.DatabaseContext.SaveChanges();
         }
 
-        private void UpdateCalendarEvents(FilterType filter)
+        private void UpdateCalendarEvents(FilterType filter, bool showDoneEvents)
         {
             CalendarEventsListBox.ItemsSource = null;
             CalendarEventsListBox.Items.Clear();
 
             if (App.DatabaseContext.CalendarEvents.Any())
             {
-                DateTime nextWeek = DateTime.Now + TimeSpan.FromDays(7);
-                App.DatabaseContext.SaveChanges();
-                CalendarEventsListBox.Visibility = Visibility.Visible;
-                CalendarEventsListBox.ItemsSource = App.DatabaseContext.CalendarEvents;
+                switch (filter)
+                {
+                    case FilterType.AllEvents:
+                        CalendarEventsListBox.Visibility = Visibility.Visible;
+                        CalendarEventsListBox.ItemsSource = App.DatabaseContext.CalendarEvents.Where(e => showDoneEvents ? e.IsDone || !e.IsDone : !e.IsDone);
+                        break;
+                    case FilterType.Today:
+                        DateTime today = DateTime.Today + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
+                        CalendarEventsListBox.Visibility = Visibility.Visible;
+                        CalendarEventsListBox.ItemsSource = App.DatabaseContext.CalendarEvents
+                            .Where(e => e.EventDateTime >= DateTime.Today)
+                            .Where(e => e.EventDateTime <= today)
+                            .Where(e => showDoneEvents ? e.IsDone && !e.IsDone : !e.IsDone);
+                        break;
+                    case FilterType.TodayOneWeek:
+                        DateTime nextWeek = DateTime.Today + TimeSpan.FromDays(7) + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
+                        CalendarEventsListBox.Visibility = Visibility.Visible;
+                        CalendarEventsListBox.ItemsSource = App.DatabaseContext.CalendarEvents
+                            .Where(e => e.EventDateTime >= DateTime.Today)
+                            .Where(e => e.EventDateTime <= nextWeek)
+                            .Where(e => showDoneEvents ? e.IsDone && !e.IsDone : !e.IsDone);
+                        break;
+                    case FilterType.TodayOneMonth:
+                        DateTime nextMonth = DateTime.Today + TimeSpan.FromDays(30) + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
+                        CalendarEventsListBox.Visibility = Visibility.Visible;
+                        CalendarEventsListBox.ItemsSource = App.DatabaseContext.CalendarEvents
+                            .Where(e => e.EventDateTime >= DateTime.Today)
+                            .Where(e => e.EventDateTime <= nextMonth)
+                            .Where(e => showDoneEvents ? e.IsDone && !e.IsDone : !e.IsDone);
+                        break;
+                }
+
                 //.Where(e => e.EventDateTime >= DateTime.Now).Where(e => e.EventDateTime <= nextWeek)
                 //.OrderByDescending(e => e.EventDateTime).ToList();
             }
@@ -66,7 +94,13 @@ namespace App.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             SwitchEnabled(false);
-            UpdateCalendarEvents(FilterType.AllEvents);
+            foreach (RadioMenuFlyoutItem item in FilterFlyout.Items.Where(i => i.GetType() == typeof(RadioMenuFlyoutItem)))
+            {
+                item.IsChecked = false;
+            }
+
+            ((RadioMenuFlyoutItem)FilterFlyout.Items.First(i => int.Parse(((RadioMenuFlyoutItem)i).Tag.ToString()) == (int)ApplicationSettingsManager.Instance.Settings.CalendarEventsFilter)).IsChecked = true;
+            UpdateCalendarEvents(ApplicationSettingsManager.Instance.Settings.CalendarEventsFilter, ApplicationSettingsManager.Instance.Settings.ShowDoneEventsInCalendar);
             base.OnNavigatedTo(e);
         }
 
@@ -121,7 +155,7 @@ namespace App.Pages
             await App.DatabaseContext.SaveChangesAsync();
             sender.PrimaryButtonClick -= AddEditPrimaryButtonClick;
 
-            UpdateCalendarEvents(FilterType.AllEvents);
+            UpdateCalendarEvents(ApplicationSettingsManager.Instance.Settings.CalendarEventsFilter, ApplicationSettingsManager.Instance.Settings.ShowDoneEventsInCalendar);
         }
 
         private async void OnEditEventClick(object sender, RoutedEventArgs e)
@@ -165,20 +199,37 @@ namespace App.Pages
             App.DatabaseContext.CalendarEvents.Remove(evt);
             await App.DatabaseContext.SaveChangesAsync();
 
-            UpdateCalendarEvents(FilterType.AllEvents);
+            UpdateCalendarEvents(ApplicationSettingsManager.Instance.Settings.CalendarEventsFilter, ApplicationSettingsManager.Instance.Settings.ShowDoneEventsInCalendar);
         }
 
         private void OnFilterVariantSelected(object sender, RoutedEventArgs e)
         {
-            UpdateCalendarEvents((FilterType)int.Parse(((RadioMenuFlyoutItem)sender).Tag.ToString()));
+            FilterType type = (FilterType)int.Parse(((RadioMenuFlyoutItem)sender).Tag.ToString());
+            UpdateCalendarEvents(type, ApplicationSettingsManager.Instance.Settings.ShowDoneEventsInCalendar);
+            ApplicationSettingsManager.Instance.Settings.CalendarEventsFilter = type;
+        }
+
+        private async void OnDoneClick(object sender, RoutedEventArgs e)
+        {
+            CalendarEvent evt = CalendarEventsListBox.SelectedItem as CalendarEvent;
+            evt.IsDone = true;
+            App.DatabaseContext.CalendarEvents.Entry(evt).State = EntityState.Modified;
+            await App.DatabaseContext.SaveChangesAsync();
+        }
+
+        private void OnShowDoneFilterEnabled(object sender, RoutedEventArgs e)
+        {
+            ApplicationSettingsManager.Instance.Settings.ShowDoneEventsInCalendar =
+                ((ToggleMenuFlyoutItem)sender).IsChecked;
+            UpdateCalendarEvents(ApplicationSettingsManager.Instance.Settings.CalendarEventsFilter, ApplicationSettingsManager.Instance.Settings.ShowDoneEventsInCalendar);
         }
     }
 
     public enum FilterType
     {
-        AllEvents,
-        Today,
-        TodayOneWeek,
-        TodayOneMonth
+        AllEvents = 1,
+        Today = 2,
+        TodayOneWeek = 3,
+        TodayOneMonth = 4
     }
 }

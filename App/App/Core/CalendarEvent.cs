@@ -35,10 +35,7 @@ namespace App.Core
         public void OnEventOccurred()
         {
             if (!IsRepeating)
-            {
-                IsDone = true;
                 return;
-            }
 
             if (RepeatOnDays.Length == 1)
             {
@@ -57,6 +54,9 @@ namespace App.Core
             }
 
             EventDateTime = Utilities.GetNextWeekday(DateTime.Now.AddDays(1), nextWeekDay) + RepeatEvery;
+
+            IsDone = false;
+            IsNotificationShown = false;
 
             App.DatabaseContext.CalendarEvents.Update(this);
             App.DatabaseContext.SaveChanges();
