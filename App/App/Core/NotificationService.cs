@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using App.Extensions;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
@@ -27,9 +29,28 @@ namespace App.Core
             AppNotificationManager.Default.Register();
         }
 
-        private void NotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
+        private async void NotificationInvoked(AppNotificationManager sender, AppNotificationActivatedEventArgs args)
         {
+            if (args.Arguments.ContainsKey("EventDone") && args.Arguments.ContainsKey("EventId"))
+            {
+                int eventId = int.Parse(args.Arguments["EventId"]);
+                bool isDone = bool.Parse(args.Arguments["EventDone"]);
 
+                CalendarEvent evt = App.DatabaseContext.CalendarEvents.First(e => e.Id == eventId);
+                if (isDone)
+                {
+                    evt.IsDone = isDone;
+                    evt.OnNotificationShown();
+                    evt.OnEventOccurred();
+                }
+                else
+                {
+                    evt.OnNotificationShown();
+                    evt.IsDismissed = true;
+                }
+                App.DatabaseContext.CalendarEvents.Entry(evt).State = EntityState.Modified;
+                await App.DatabaseContext.SaveChangesAsync();
+            }
         }
 
         private void EventTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -37,13 +58,15 @@ namespace App.Core
             UpdateCalendarEvents();
         }
 
-        public void UpdateCalendarEvents()
+        public async void UpdateCalendarEvents()
         {
+            // TODO: figure out how to reimplement calendar events handling
+            
             CalendarEvent[] events =
                 App.DatabaseContext.CalendarEvents.ToArray();
-            CalendarEvent[] currentEvents = events.Where(e => e.EventDateTime == DateTime.Now.TrimSeconds()).ToArray();
-            CalendarEvent[] eventsToRemind = events.Where(e => e.EventDateTime >= DateTime.Now - e.RemindBefore && !e.IsNotificationShown && !e.IsDone).ToArray();
-            CalendarEvent[] missedEvents = events.Where(e => e.EventDateTime <= DateTime.Now && !e.IsNotificationShown && !e.IsDone).ToArray();
+            CalendarEvent[] currentEvents = events.Where(e => e.EventDateTime == DateTime.Now.TrimSeconds() && !e.IsNotificationShown && !e.IsDone).ToArray();
+            CalendarEvent[] eventsToRemind = events.Where(e => e.EventDateTime >= DateTime.Now.TrimSeconds() - e.RemindBefore && !e.IsNotificationShown && !e.IsDone && e.RemindBefore > TimeSpan.Zero).Except(currentEvents).ToArray();
+            CalendarEvent[] missedEvents = events.Where(e => e.EventDateTime <= DateTime.Now.TrimSeconds() && (!e.IsNotificationShown || e.IsDismissed) && !e.IsDone).Except(currentEvents).ToArray();
 
             if (currentEvents.Length > 1)
             {
@@ -75,7 +98,7 @@ namespace App.Core
             {
                 ShowCalendarEventsMissed(missedEvents.Length);
                 foreach (CalendarEvent evt in missedEvents)
-                {            
+                {
                     evt.OnNotificationShown();
                 }
             }
@@ -84,9 +107,9 @@ namespace App.Core
                 ShowCalendarEventMissed(missedEvents[0]);
             }
 
-            App.DatabaseContext.SaveChanges();
+            await App.DatabaseContext.SaveChangesAsync();
         }
-        
+
         public void ShowCalendarEventOccurred(CalendarEvent evt)
         {
             AppNotificationButton doneButton = new AppNotificationButton();
@@ -101,8 +124,9 @@ namespace App.Core
             string notificationText = string.Format("{0}{1}{0}{2}", Environment.NewLine,
                 evt.Title, evt.Description);
 
+            evt.OnNotificationShown();
             evt.OnEventOccurred();
-            
+
             AppNotification notification = new AppNotificationBuilder()
                 .SetAudioEvent(AppNotificationSoundEvent.Reminder, AppNotificationAudioLooping.None)
                 .AddText("Event is happening right now!").AddText(evt.EventDateTime.ToString("U"))
@@ -130,7 +154,7 @@ namespace App.Core
                 evt.Title, evt.Description);
 
             evt.OnEventOccurred();
-            
+
             AppNotification notification = new AppNotificationBuilder()
                 .SetAudioEvent(AppNotificationSoundEvent.Reminder, AppNotificationAudioLooping.None)
                 .AddText("Event missed!").AddText(evt.EventDateTime.ToString("U"))
@@ -153,7 +177,7 @@ namespace App.Core
             notification.Tag = MultipleEventsMissed;
             AppNotificationManager.Default.Show(notification);
         }
-        
+
         public void ShowCalendarEventsOccurred(int amount)
         {
             AppNotification notification = new AppNotificationBuilder()
@@ -186,7 +210,7 @@ namespace App.Core
             dismissButton.Content = "Dismiss";
             dismissButton.AddArgument("EventDone", "False");
             dismissButton.AddArgument("EventId", evt.Id.ToString());
-            
+
             string notificationText = string.Format("{0}{1}{0}{2}", Environment.NewLine,
                 evt.Title, evt.Description);
 
