@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using App.Core;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -24,6 +25,21 @@ namespace App.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (ApplicationSettingsManager.Instance.LastException is not null)
+            {
+                TopInfoBar.Title = "Error with loading settings!";
+                TopInfoBar.Message = string.Format(
+                    "There is an error with loading applications settings. Your settings were reset to defaults and old settings were backed up in application data folder.{0}Error Code: 0x{2}{0}Message: {1}",
+                    Environment.NewLine, ApplicationSettingsManager.Instance.LastException.Message,
+                    ApplicationSettingsManager.Instance.LastException.HResult.ToString("x8"));
+                TopInfoBar.Severity = InfoBarSeverity.Error;
+            }
+
+            base.OnNavigatedTo(e);
         }
 
         private void OnDatabasePurgeConfirmClick(object sender, RoutedEventArgs e)

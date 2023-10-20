@@ -22,7 +22,7 @@
 
     <ScrollViewer>
         <StackPanel Margin="0 0 16 0">
-            <InfoBar IsOpen="{x:Bind core:ApplicationSettingsManager.Instance.LastException, Mode=OneWay, Converter={StaticResource NullToBoolConverter}}" Content="Test"/>
+            <InfoBar x:Name="TopInfoBar" IsOpen="True" IsClosable="True"/>
 
             <TextBlock Text="Database management" Style="{StaticResource SettingsSectionHeaderStyle}"/>
             <controls:SettingsCard Header="Database purge" Description="Purge whole application database. This can fix a bunch of problems with data loading, but you will lose all your data!">
