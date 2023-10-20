@@ -80,8 +80,6 @@ namespace App
             if (!Directory.Exists(ApplicationDataStoragePath))
                 Directory.CreateDirectory(ApplicationDataStoragePath);
 
-            new ApplicationSettingsManager();
-
             if (Environment.GetCommandLineArgs().Contains("--purge-db"))
             {
                 PurgeDatabase();
