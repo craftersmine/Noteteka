@@ -66,7 +66,7 @@ namespace App.Pages
                         CalendarEventsListBox.ItemsSource = App.DatabaseContext.CalendarEvents
                             .Where(e => e.EventDateTime >= DateTime.Today)
                             .Where(e => e.EventDateTime <= today)
-                            .Where(e => showDoneEvents ? e.IsDone && !e.IsDone : !e.IsDone);
+                            .Where(e => showDoneEvents ? e.IsDone || !e.IsDone : !e.IsDone);
                         break;
                     case FilterType.TodayOneWeek:
                         DateTime nextWeek = DateTime.Today + TimeSpan.FromDays(7) + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
@@ -74,7 +74,7 @@ namespace App.Pages
                         CalendarEventsListBox.ItemsSource = App.DatabaseContext.CalendarEvents
                             .Where(e => e.EventDateTime >= DateTime.Today)
                             .Where(e => e.EventDateTime <= nextWeek)
-                            .Where(e => showDoneEvents ? e.IsDone && !e.IsDone : !e.IsDone);
+                            .Where(e => showDoneEvents ? e.IsDone || !e.IsDone : !e.IsDone);
                         break;
                     case FilterType.TodayOneMonth:
                         DateTime nextMonth = DateTime.Today + TimeSpan.FromDays(30) + TimeSpan.FromHours(23) + TimeSpan.FromMinutes(59);
@@ -82,7 +82,7 @@ namespace App.Pages
                         CalendarEventsListBox.ItemsSource = App.DatabaseContext.CalendarEvents
                             .Where(e => e.EventDateTime >= DateTime.Today)
                             .Where(e => e.EventDateTime <= nextMonth)
-                            .Where(e => showDoneEvents ? e.IsDone && !e.IsDone : !e.IsDone);
+                            .Where(e => showDoneEvents ? e.IsDone || !e.IsDone : !e.IsDone);
                         break;
                 }
 
@@ -215,6 +215,7 @@ namespace App.Pages
             evt.IsDone = true;
             App.DatabaseContext.CalendarEvents.Entry(evt).State = EntityState.Modified;
             await App.DatabaseContext.SaveChangesAsync();
+            UpdateCalendarEvents(ApplicationSettingsManager.Instance.Settings.CalendarEventsFilter, ApplicationSettingsManager.Instance.Settings.ShowDoneEventsInCalendar);
         }
 
         private void OnShowDoneFilterEnabled(object sender, RoutedEventArgs e)
