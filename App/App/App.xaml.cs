@@ -88,6 +88,7 @@ namespace App
             }
 
             Application.Current.UnhandledException += Current_UnhandledException;
+            App.Current.UnhandledException += Current_UnhandledException;
 
             try
             {
