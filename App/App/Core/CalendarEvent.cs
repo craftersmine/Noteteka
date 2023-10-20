@@ -20,6 +20,7 @@ namespace App.Core
         public bool IsRepeating { get; set; }
         public bool IsDone { get; set; }
         public bool IsNotificationShown { get; set; }
+        public bool IsDismissed { get; set; }
 
         public CalendarEvent()
         {
