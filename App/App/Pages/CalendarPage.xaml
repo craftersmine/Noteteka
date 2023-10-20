@@ -19,7 +19,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <AppBarButton Label="Add Event..." Icon="Add" Click="OnAddEventClick" x:Name="AddButton" ToolTipService.ToolTip="Add new event to a calendar"/>
+            <AppBarButton Label="Add..." Icon="Add" Click="OnAddEventClick" x:Name="AddButton" ToolTipService.ToolTip="Add new event to a calendar"/>
             <AppBarSeparator/>
             <AppBarButton Label="Edit..." Icon="Edit" Click="OnEditEventClick" x:Name="EditButton" ToolTipService.ToolTip="Edit selected event"/>
             <AppBarButton Label="Remove" Icon="Delete" x:Name="RemoveButton" ToolTipService.ToolTip="Remove selected event">
@@ -37,7 +37,7 @@
             <AppBarSeparator Visibility="Collapsed"/>
             <AppBarButton Label="Done" Icon="Accept" ToolTipService.ToolTip="Mark event as done" x:Name="DoneButton" Click="OnDoneClick"/>
             <AppBarSeparator Visibility="Visible"/>
-            <AppBarButton Label="Show..." Icon="Filter" ToolTipService.ToolTip="Select what events to show">
+            <AppBarButton Label="Filter" Icon="Filter" ToolTipService.ToolTip="Select what events to show">
                 <AppBarButton.Flyout>
                     <MenuFlyout x:Name="FilterFlyout">
                         <RadioMenuFlyoutItem Text="All events" Tag="1" IsChecked="True" Click="OnFilterVariantSelected"/>
