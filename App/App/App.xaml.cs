@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using Windows.ApplicationModel;
@@ -42,8 +43,7 @@ namespace App
 
         public static Version CurrentVersion => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
-        public static string CurrentVersionString => string.Format("v{1}.{2}.{3}", CurrentVersion.Major,
-            CurrentVersion.Minor, CurrentVersion.Revision);
+        public static string CurrentVersionString => System.Reflection.Assembly.GetExecutingAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
 
         public static NotificationService NotificationService { get; private set; }
 

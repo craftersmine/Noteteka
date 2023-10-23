@@ -22,7 +22,7 @@
 
     <ScrollViewer>
         <StackPanel Margin="0 0 16 0">
-            <InfoBar x:Name="TopInfoBar" IsOpen="True" IsClosable="True"/>
+            <InfoBar x:Name="TopInfoBar" IsOpen="False" IsClosable="False"/>
 
             <TextBlock Text="Database management" Style="{StaticResource SettingsSectionHeaderStyle}"/>
             <controls:SettingsCard Header="Database purge" Description="Purge whole application database. This can fix a bunch of problems with data loading, but you will lose all your data!">
@@ -49,7 +49,7 @@
                 <controls:SettingsExpander.Description>
                     <TextBlock>
                         <Run Text="YourNote - " FontWeight="SemiBold"/>
-                        <Run Text="{x:Bind root:App.CurrentVersion}"/>
+                        <Run Text="{x:Bind root:App.CurrentVersionString}"/>
                     </TextBlock>
                 </controls:SettingsExpander.Description>
                 <controls:SettingsExpander.Items>
