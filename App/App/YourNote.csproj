@@ -15,6 +15,8 @@
 		<!-- This bundles the WinUI3 components -->
 		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 		<AssemblyName>YourNote</AssemblyName>
+		<Version>0.1.0-alpha</Version>
+		<AssemblyVersion>0.1.2.296</AssemblyVersion>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Assets\Licenses\CommunityToolkit_LICENSE.txt" />
@@ -23,12 +25,14 @@
 	  <None Remove="Assets\Licenses\SQLite_LICENSE.txt" />
 	  <None Remove="Assets\Licenses\WinUI3_LICENSE.txt" />
 	  <None Remove="Assets\Licenses\WinUIEx_LICENSE.txt" />
+	  <None Remove="Controls\NotepadPageEditor.xaml" />
 	  <None Remove="Dialogs\AddEditCalendarEventDialog.xaml" />
 	  <None Remove="Dialogs\AddEditNoteDialog.xaml" />
 	  <None Remove="Dialogs\AddEditTaskDialog.xaml" />
 	  <None Remove="HomePage.xaml" />
 	  <None Remove="Icons.xaml" />
 	  <None Remove="Pages\CalendarPage.xaml" />
+	  <None Remove="Pages\NotepadPage.xaml" />
 	  <None Remove="Pages\NotesPage.xaml" />
 	  <None Remove="Pages\SettingsPage.xaml" />
 	  <None Remove="Pages\ToDoTasksPage.xaml" />
@@ -72,9 +76,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Assets\Icons\" />
-	  <Folder Include="Attrubutes\" />
-	  <Folder Include="Controls\" />
-	  <Folder Include="Converters\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Update="Assets\Licenses\CommunityToolkit_LICENSE.txt">
@@ -95,6 +96,16 @@
 	  <Content Update="Assets\Licenses\WinUIEx_LICENSE.txt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Controls\NotepadPageEditor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="Pages\NotepadPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Dialogs\AddEditCalendarEventDialog.xaml">
