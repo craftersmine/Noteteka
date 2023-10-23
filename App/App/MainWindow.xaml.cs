@@ -54,6 +54,7 @@ namespace App
                     NavigateTo<NotesPage>();
                     break;
                 case "notebook":
+                    NavigateTo<NotepadPage>();
                     break;
                 case "tasks":
                     NavigateTo<ToDoTasksPage>();
