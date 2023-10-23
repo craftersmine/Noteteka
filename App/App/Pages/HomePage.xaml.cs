@@ -36,14 +36,12 @@ namespace App
 
             UpdateNotesList();
             UpdateToDoTasks();
-            UpdateUpcomingTasks();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             UpdateNotesList();
             UpdateToDoTasks();
-            UpdateUpcomingTasks();
             base.OnNavigatedTo(e);
         }
 
@@ -148,11 +146,6 @@ namespace App
                 ToDoEventsGridView.Visibility = Visibility.Collapsed;
                 NoToDoEventsLabel.Visibility = Visibility.Visible;
             }
-        }
-
-        private void UpdateUpcomingTasks()
-        {
-
         }
 
         private void EditNoteClick(object sender, RoutedEventArgs e)
