@@ -14,6 +14,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using App.Controls;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -40,9 +41,19 @@ namespace App.Pages
 
         }
 
-        private void OnAddNotepadPageClick(TabView sender, object args)
+        private async void OnAddNotepadPageClick(TabView sender, object args)
         {
-            throw new NotImplementedException();
+            TabViewItem tab = new TabViewItem();
+            Core.NotepadPage page = new Core.NotepadPage();
+            page.Title = "Test";
+
+            NotepadPageEditor editor = new NotepadPageEditor(page);
+            tab.Content = editor;
+            tab.Header = page.Title;
+            sender.TabItems.Add(tab);
+
+            App.DatabaseContext.NotepadPages.Add(page);
+            await App.DatabaseContext.SaveChangesAsync();
         }
     }
 }
