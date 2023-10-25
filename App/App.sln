@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YourNote", "App\YourNote.csproj", "{48E3D49F-F113-4E69-95EF-09627FF91343}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Noteteka", "App\Noteteka.csproj", "{48E3D49F-F113-4E69-95EF-09627FF91343}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,18 +39,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E44F0816-5AAC-40DF-917F-56F16F119603}
-	EndGlobalSection
-	GlobalSection(AutomaticVersions) = postSolution
-		PrimaryVersionType = AssemblyInfoVersionAttribute
-		UpdateAssemblyVersion = True
-		UpdateAssemblyFileVersion = True
-		UpdateAssemblyInfoVersion = True
-		AdvancedSettingsExpanded = True
-		AssemblyVersionSettings = None.IncrementOnDemand.Increment.DayOfYearStamp
-		AssemblyFileVersionSettings = None.IncrementOnDemand.Increment.DayOfYearStamp
-		UpdatePackageVersion = False
-		AssemblyInfoVersionSemVerSettings = AssemblyVersion.IncrementOnce.Alpha
-		AssemblyInfoVersionType = SemVer1
-		InheritWinAppVersionFrom = None
 	EndGlobalSection
 EndGlobal
