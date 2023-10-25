@@ -19,7 +19,7 @@ using Microsoft.UI.Xaml.Navigation;
 
 namespace App.Controls
 {
-    public sealed partial class NotepadPageEditor : TabViewItem
+    public sealed partial class NotepadPageEditor : Grid
     {
         public NotepadPage Page { get; private set; }
 
