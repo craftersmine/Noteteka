@@ -14,9 +14,16 @@
 		<SelfContained>true</SelfContained>
 		<!-- This bundles the WinUI3 components -->
 		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-		<AssemblyName>YourNote</AssemblyName>
+		<AssemblyName>Noteteka</AssemblyName>
+				<Authors></Authors>
 		<Version>0.1.0-alpha</Version>
-		<AssemblyVersion>0.1.2.296</AssemblyVersion>
+		<AssemblyVersion>0.1.23.298</AssemblyVersion>
+		<FileVersion>0.1.21.298</FileVersion>
+		<Title>Noteteka</Title>
+		<Authors>BuddyTeam</Authors>
+		<Company>BuddyTeam LLC</Company>
+		<Copyright>BuddyTeam LLC © 2023</Copyright>
+		<Description>Organizer for your life. Take notes, make events and all in one place.</Description>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Assets\Licenses\CommunityToolkit_LICENSE.txt" />

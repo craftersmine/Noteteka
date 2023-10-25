@@ -45,6 +45,13 @@ namespace App
 
         public static string CurrentVersionString => System.Reflection.Assembly.GetExecutingAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
 
+        public static string AppName => System.Reflection.Assembly.GetExecutingAssembly()
+            ?.GetCustomAttribute<AssemblyProductAttribute>().Product;
+        public static string AppCopyright => System.Reflection.Assembly.GetExecutingAssembly()
+            ?.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright;
+        public static string AppDescription => System.Reflection.Assembly.GetExecutingAssembly()
+            ?.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
+
         public static NotificationService NotificationService { get; private set; }
 
         public static Timer EventTimer { get; private set; }
@@ -75,7 +82,7 @@ namespace App
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             ApplicationDataStoragePath =
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "YourNote");
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Noteteka");
 
             if (!Directory.Exists(ApplicationDataStoragePath))
                 Directory.CreateDirectory(ApplicationDataStoragePath);

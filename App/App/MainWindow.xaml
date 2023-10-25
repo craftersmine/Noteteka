@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winUiEx="using:WinUIEx"
     mc:Ignorable="d"
-    Title="YourNote" MinWidth="450">
+    Title="{x:Bind local:App.AppName}" MinWidth="450">
     <winUiEx:WindowEx.SystemBackdrop>
         <MicaBackdrop Kind="Base"/>
     </winUiEx:WindowEx.SystemBackdrop>
@@ -26,7 +26,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <SymbolIcon Symbol="Calendar" Grid.Column="0" Margin="16 0" HorizontalAlignment="Left"/>
-            <TextBlock Text="YourNote" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource CaptionTextBlockStyle}"/>
+            <TextBlock Text="{x:Bind local:App.AppName}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource CaptionTextBlockStyle}"/>
         </Grid>
 
         <NavigationView Grid.Row="1" x:Name="NavigationView" SelectionChanged="OnNavigationViewItemChanged">
