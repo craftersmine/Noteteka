@@ -7,5 +7,35 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <RichEditBox/>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition/>
+    </Grid.RowDefinitions>
+    <CommandBar Grid.Row="0" Background="Transparent" HorizontalAlignment="Left">
+        <AppBarButton Icon="Undo" Label="Undo">
+
+        </AppBarButton>
+        <AppBarButton Icon="Redo" Label="Redo">
+
+        </AppBarButton>
+        <AppBarSeparator/>
+        <AppBarButton Icon="Bold" Label="Bold">
+            <AppBarButton.KeyboardAccelerators>
+                <KeyboardAccelerator Modifiers="Control" Key="B"/>
+            </AppBarButton.KeyboardAccelerators>
+        </AppBarButton>
+        <AppBarButton Icon="Italic" Label="Italic">
+            <AppBarButton.KeyboardAccelerators>
+                <KeyboardAccelerator Modifiers="Control" Key="B"/>
+            </AppBarButton.KeyboardAccelerators>
+        </AppBarButton>
+        <AppBarButton Icon="Underline" Label="Underline">
+            <AppBarButton.KeyboardAccelerators>
+                <KeyboardAccelerator Modifiers="Control" Key="B"/>
+            </AppBarButton.KeyboardAccelerators>
+        </AppBarButton>
+        <AppBarSeparator/>
+
+    </CommandBar>
+    <RichEditBox Grid.Row="1" TextChanged="RichEditBox_OnTextChanged" x:Name="RichEditorBox"/>
 </Grid>
