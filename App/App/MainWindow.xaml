@@ -29,14 +29,14 @@
             <TextBlock Text="{x:Bind local:App.AppName}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource CaptionTextBlockStyle}"/>
         </Grid>
 
-        <NavigationView Grid.Row="1" x:Name="NavigationView" SelectionChanged="OnNavigationViewItemChanged">
-            <NavigationView.AutoSuggestBox>
+        <NavigationView Grid.Row="1" x:Name="NavigationView" SelectionChanged="OnNavigationViewItemChanged" IsBackButtonVisible="Collapsed">
+            <!--<NavigationView.AutoSuggestBox>
                 <AutoSuggestBox PlaceholderText="Search">
                     <AutoSuggestBox.QueryIcon>
                         <SymbolIcon Symbol="Find"/>
                     </AutoSuggestBox.QueryIcon>
                 </AutoSuggestBox>
-            </NavigationView.AutoSuggestBox>
+            </NavigationView.AutoSuggestBox>-->
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Home" Icon="Home" Tag="homePage"/>
                 <NavigationViewItem Content="Calendar" Icon="Calendar" Tag="calendar"/>
