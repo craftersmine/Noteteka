@@ -14,7 +14,7 @@ namespace App.Storage
 {
     public class ApplicationDatabaseContext : DbContext
     {
-        private static readonly Guid DbVersion = new Guid("b8401604-a9f0-4c5c-98f3-e67d47c0e4dc");
+        private static readonly Guid DbVersion = new Guid("caca241e-294a-4c28-87e7-012dafcd8f08");
 
         public string ApplicationDatabasePath { get; private set; }
 
@@ -37,7 +37,11 @@ namespace App.Storage
             }
 
             if (Metadata.ToArray()[0].DbVersion != DbVersion)
+            {
                 Database.Migrate();
+                Metadata.First().DbVersion = DbVersion;
+                SaveChanges();
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
