@@ -1,18 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Storage.Streams;
 using App.Core;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.UI.Text;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -21,13 +13,28 @@ namespace App.Controls
 {
     public sealed partial class NotepadPageEditor : Grid
     {
+        public bool IsChanged { get; private set; }
         public NotepadPage Page { get; private set; }
+        public RichEditTextDocument Document
+        {
+            get => RichEditorBox.Document;
+        }
 
         public NotepadPageEditor(NotepadPage page)
         {
             Page = page;
 
             this.InitializeComponent();
+
+            using (MemoryStream stream = new MemoryStream(Page.Data))
+            {
+                RichEditorBox.Document.LoadFromStream(TextSetOptions.None, stream.AsRandomAccessStream());
+            }
+        }
+
+        private async void RichEditBox_OnTextChanged(object sender, RoutedEventArgs e)
+        {
+            IsChanged = true;
         }
     }
 }
