@@ -7,14 +7,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Tag="Notebook">
+    <Page.Resources>
+        <MenuFlyout x:Name="TabContextMenu">
+            <MenuFlyoutItem Text="Edit" Icon="Edit"/>
+        </MenuFlyout>
+    </Page.Resources>
 
-    <Grid>
+    <Grid Margin="-48 0 8 8">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TabView Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" VerticalAlignment="Stretch" 
                  BorderThickness="1" BorderBrush="{ThemeResource CardBackgroundFillColorSecondaryBrush}" 
                  CanDragTabs="False" CanReorderTabs="False"
-                 AddTabButtonClick="OnAddNotepadPageClick"/>
+                 AddTabButtonClick="OnAddNotepadPageClick" x:Name="NotepadPagesTabView"/>
     </Grid>
 </Page>
