@@ -13,11 +13,11 @@
         </MenuFlyout>
     </Page.Resources>
 
-    <Grid Margin="-48 0 8 8">
+    <Grid Margin="-56 0 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TabView Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" VerticalAlignment="Stretch" 
+        <TabView Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Stretch" 
                  BorderThickness="1" BorderBrush="{ThemeResource CardBackgroundFillColorSecondaryBrush}" 
                  CanDragTabs="False" CanReorderTabs="False"
                  AddTabButtonClick="OnAddNotepadPageClick" x:Name="NotepadPagesTabView"/>
