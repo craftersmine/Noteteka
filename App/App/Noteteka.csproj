@@ -15,23 +15,33 @@
 		<!-- This bundles the WinUI3 components -->
 		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 		<AssemblyName>Noteteka</AssemblyName>
-				<Authors></Authors>
-		<Version>0.1.0-alpha</Version>
-		<AssemblyVersion>0.1.23.298</AssemblyVersion>
-		<FileVersion>0.1.21.298</FileVersion>
+		<Version>0.2-beta</Version>
+		<AssemblyVersion>0.2.23310.1214</AssemblyVersion>
+		<FileVersion>0.2.23310.1214</FileVersion>
 		<Title>Noteteka</Title>
 		<Authors>BuddyTeam</Authors>
 		<Company>BuddyTeam LLC</Company>
 		<Copyright>BuddyTeam LLC © 2023</Copyright>
 		<Description>Organizer for your life. Take notes, make events and all in one place.</Description>
+		<ShouldCreateLogs>True</ShouldCreateLogs>
+		<AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
+		<UpdateAssemblyVersion>False</UpdateAssemblyVersion>
+		<UpdateAssemblyFileVersion>False</UpdateAssemblyFileVersion>
+		<UpdateAssemblyInfoVersion>False</UpdateAssemblyInfoVersion>
+		<UpdatePackageVersion>False</UpdatePackageVersion>
+		<AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
+		<InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="Assets\Licenses\CommunityToolkit_LICENSE.txt" />
-	  <None Remove="Assets\Licenses\EntityFramework_LICENSE.txt" />
-	  <None Remove="Assets\Licenses\FluentIcons_LICENSE.txt" />
-	  <None Remove="Assets\Licenses\SQLite_LICENSE.txt" />
-	  <None Remove="Assets\Licenses\WinUI3_LICENSE.txt" />
-	  <None Remove="Assets\Licenses\WinUIEx_LICENSE.txt" />
+	  <Content Remove="Assets\Legal\Noteteka_PrivacyPolicy.txt" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Assets\Legal\CommunityToolkit_LICENSE.txt" />
+	  <None Remove="Assets\Legal\EntityFramework_LICENSE.txt" />
+	  <None Remove="Assets\Legal\FluentIcons_LICENSE.txt" />
+	  <None Remove="Assets\Legal\SQLite_LICENSE.txt" />
+	  <None Remove="Assets\Legal\WinUI3_LICENSE.txt" />
+	  <None Remove="Assets\Legal\WinUIEx_LICENSE.txt" />
 	  <None Remove="Controls\NotepadPageEditor.xaml" />
 	  <None Remove="Dialogs\AddEditCalendarEventDialog.xaml" />
 	  <None Remove="Dialogs\AddEditNoteDialog.xaml" />
@@ -82,27 +92,32 @@
 	  </Page>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Assets\Icons\" />
+	  <Content Update="Assets\Legal\CommunityToolkit_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Legal\EntityFramework_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Legal\FluentIcons_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Legal\Noteteka_Application_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Legal\SQLite_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Legal\WinUI3_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="Assets\Legal\WinUIEx_LICENSE.txt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 	<ItemGroup>
-	  <Content Update="Assets\Licenses\CommunityToolkit_LICENSE.txt">
+	  <None Update="Assets\Legal\Noteteka_PrivacyPolicy.txt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="Assets\Licenses\EntityFramework_LICENSE.txt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="Assets\Licenses\FluentIcons_LICENSE.txt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="Assets\Licenses\SQLite_LICENSE.txt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="Assets\Licenses\WinUI3_LICENSE.txt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Update="Assets\Licenses\WinUIEx_LICENSE.txt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
+	  </None>
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="Controls\NotepadPageEditor.xaml">
