@@ -51,6 +51,8 @@
                         <Run Text="{x:Bind root:App.AppName}" FontWeight="SemiBold"/>
                         <Run Text=" - " FontWeight="SemiBold"/>
                         <Run Text="{x:Bind root:App.CurrentVersionString}"/>
+                        <Run Text="- v"/>
+                        <Run Text="{x:Bind root:App.CurrentVersion}"/>
                     </TextBlock>
                 </controls:SettingsExpander.Description>
                 <controls:SettingsExpander.Items>
@@ -70,7 +72,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Licenses" Style="{StaticResource SettingsSectionHeaderStyle}"/>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Used software and other assets licenses" Style="{StaticResource SettingsSectionHeaderStyle}"/>
                                 <HyperlinkButton Grid.Row="1" Grid.Column="0" Content="WinUI 3" Click="LicenseHyperlinkClick" Tag="WinUI3"/>
                                 <HyperlinkButton Grid.Row="1" Grid.Column="1" Content="CommunityToolkit" Click="LicenseHyperlinkClick" Tag="CommunityToolkit" Margin="16 0 0 0"/>
                                 <HyperlinkButton Grid.Row="1" Grid.Column="2" Content="Entity Framework" Click="LicenseHyperlinkClick" Tag="EntityFramework" Margin="16 0 0 0"/>
@@ -84,12 +86,12 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Legal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource SettingsSectionHeaderStyle}"/>
-                                <HyperlinkButton Grid.Row="1" Grid.Column="0" Content="Privacy Policy"/>
-                                <HyperlinkButton Grid.Row="1" Grid.Column="1" Content=""/>
+                                <HyperlinkButton Grid.Row="1" Grid.Column="0" Content="Privacy Policy" Click="PrivacyPolicyClick"/>
+                                <HyperlinkButton Grid.Row="1" Grid.Column="1" Content="Application license" Click="LicenseHyperlinkClick" Tag="Noteteka_Application"/>
                             </Grid>
                         </StackPanel>
                     </controls:SettingsCard>

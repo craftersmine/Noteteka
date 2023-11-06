@@ -51,7 +51,28 @@ namespace App.Pages
         {
             ProcessStartInfo psi = new ProcessStartInfo();
 
-            psi.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "Licenses", (sender as HyperlinkButton).Tag.ToString() + "_LICENSE.txt");
+            psi.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "Legal", (sender as HyperlinkButton).Tag.ToString() + "_LICENSE.txt");
+            psi.UseShellExecute = true;
+
+            if (File.Exists(psi.FileName))
+                Process.Start(psi);
+            else
+            {
+                ContentDialog dlg = new ContentDialog();
+                dlg.XamlRoot = this.XamlRoot;
+                dlg.Title = "Error opening license file";
+                dlg.Content = string.Format("Unable to locate \"{0}\" license file at \r\n\"{1}\"!", (sender as HyperlinkButton).Content.ToString(), psi.FileName);
+                dlg.CloseButtonText = "Ok";
+                dlg.CloseButtonClick += (dialog, args) => dialog.Hide();
+                dlg.ShowAsync();
+            }
+        }
+
+        private void PrivacyPolicyClick(object sender, RoutedEventArgs e)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo();
+
+            psi.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "Legal", "Noteteka_PrivacyPolicy.txt");
             psi.UseShellExecute = true;
 
             if (File.Exists(psi.FileName))
