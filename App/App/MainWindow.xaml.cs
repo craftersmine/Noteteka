@@ -37,6 +37,8 @@ namespace App
 
             SetTitleBar(AppTitlebar);
 
+            App.MainWindow = this;
+
             NavigationView.SelectedItem = NavigationView.MenuItems.FirstOrDefault(i => (i as NavigationViewItem).Tag.ToString().ToLower() == "homepage");
         }
 
@@ -65,7 +67,13 @@ namespace App
             }
         }
 
-        private void NavigateTo<T>()
+        public void NavigateTo(string tag)
+        {
+            NavigationView.SelectedItem =
+                NavigationView.MenuItems.First(i => (i as NavigationViewItem).Tag.ToString() == tag);
+        }
+
+        public void NavigateTo<T>()
         {
             (NavigationView.Content as Frame).Navigate(typeof(T));
             NavigationView.Header = ((NavigationView.Content as Frame).Content as Page).Tag;
