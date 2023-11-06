@@ -35,7 +35,7 @@ namespace App.Pages
         public NotepadPage()
         {
             this.InitializeComponent();
-            _timer.Interval = TimeSpan.FromSeconds(10);
+            _timer.Interval = TimeSpan.FromSeconds(3);
             _timer.Tick += _timer_Tick;
             _timer.Start();
         }
@@ -49,7 +49,7 @@ namespace App.Pages
                 {
                     using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
                     {
-                        pageEditor.Document.SaveToStream(TextGetOptions.None, stream);
+                        pageEditor.Document.SaveToStream(TextGetOptions.FormatRtf, stream);
 
                         DataReader reader = new DataReader(stream.GetInputStreamAt(0));
                         pageEditor.Page.Data = new byte[stream.Size];
@@ -71,6 +71,8 @@ namespace App.Pages
 
         public void UpdatePages()
         {
+            NotepadPagesTabView.TabItems.Clear();
+
             foreach (Core.NotepadPage page in App.DatabaseContext.NotepadPages)
             {
                 TabViewItem tab = new TabViewItem();
@@ -80,6 +82,7 @@ namespace App.Pages
                 NotepadPageEditor editor = new NotepadPageEditor(page);
                 tab.Content = editor;
                 tab.Header = page.Title;
+                tab.Tag = page.Id;
                 NotepadPagesTabView.TabItems.Add(tab);
             }
         }
@@ -90,7 +93,8 @@ namespace App.Pages
             tab.ContextFlyout = TabContextMenu;
             tab.CloseRequested += OnTabClosed;
             Core.NotepadPage page = new Core.NotepadPage();
-            page.Title = "Test";
+            page.Title = "New Page";
+            tab.Tag = page.Id;
 
             NotepadPageEditor editor = new NotepadPageEditor(page);
             tab.Content = editor;
@@ -126,6 +130,46 @@ namespace App.Pages
 
                     NotepadPagesTabView.TabItems.Remove(sender);
                     break;
+            }
+        }
+
+        private async void OnEditClick(object sender, RoutedEventArgs e)
+        {
+            TabViewItem selectedItem = NotepadPagesTabView.SelectedItem as TabViewItem;
+            int selectedPageIndex = NotepadPagesTabView.SelectedIndex;
+            if (selectedItem is not null)
+            {
+                Core.NotepadPage page =
+                    App.DatabaseContext.NotepadPages.First(p => p.Id == int.Parse(selectedItem.Tag.ToString()));
+
+                ContentDialog dlg = new ContentDialog();
+                AddEditNoteDialog dlgContent = new AddEditNoteDialog(null);
+                dlg.XamlRoot = this.XamlRoot;
+                dlg.Title = "Edit page name";
+
+                TextBox pageTitleTextBox = new TextBox();
+                pageTitleTextBox.Text = page.Title;
+
+                dlg.Content = pageTitleTextBox;
+                dlg.CloseButtonText = "Cancel";
+                dlg.PrimaryButtonText = "Ok";
+                dlg.CloseButtonClick += (dialog, args) => dialog.Hide();
+                switch (await dlg.ShowAsync())
+                {
+                    case ContentDialogResult.Primary:
+
+                        page.Title = pageTitleTextBox.Text;
+
+                        App.DatabaseContext.NotepadPages.Entry(page).State = EntityState.Modified;
+
+                        await App.DatabaseContext.SaveChangesAsync();
+
+                        UpdatePages();
+
+                        NotepadPagesTabView.SelectedIndex = selectedPageIndex;
+
+                        break;
+                }
             }
         }
     }

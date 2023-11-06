@@ -9,7 +9,7 @@
     mc:Ignorable="d" Tag="Notebook">
     <Page.Resources>
         <MenuFlyout x:Name="TabContextMenu">
-            <MenuFlyoutItem Text="Edit" Icon="Edit"/>
+            <MenuFlyoutItem Text="Edit" Icon="Edit" Click="OnEditClick"/>
         </MenuFlyout>
     </Page.Resources>
 
