@@ -12,34 +12,49 @@
         <RowDefinition/>
     </Grid.RowDefinitions>
     <CommandBar Grid.Row="0" Background="Transparent" HorizontalAlignment="Left">
+        <AppBarToggleButton Icon="Edit" Label="Edit" Click="OnEditSwitchClick"/>
+        <AppBarSeparator/>
         <AppBarButton Icon="Undo" Label="Undo" Click="OnUndoClick">
-            <AppBarButton.KeyboardAccelerators>
-                <KeyboardAccelerator Modifiers="Control" Key="Z"/>
-            </AppBarButton.KeyboardAccelerators>
         </AppBarButton>
         <AppBarButton Icon="Redo" Label="Redo" Click="OnRedoClick">
-            <AppBarButton.KeyboardAccelerators>
-                <KeyboardAccelerator Modifiers="Control" Key="Y"/>
-            </AppBarButton.KeyboardAccelerators>
+        </AppBarButton>
+        <AppBarSeparator/>
+        <AppBarButton Icon="Cut" Label="Cut" Click="OnCutClick">
+        </AppBarButton>
+        <AppBarButton Icon="Copy" Label="Copy" Click="OnCopyClick">
+        </AppBarButton>
+        <AppBarButton Icon="Paste" Label="Paste" Click="OnPasteClick">
         </AppBarButton>
         <AppBarSeparator/>
         <AppBarButton Icon="Bold" Label="Bold" Click="OnBoldClick">
-            <AppBarButton.KeyboardAccelerators>
-                <KeyboardAccelerator Modifiers="Control" Key="B"/>
-            </AppBarButton.KeyboardAccelerators>
         </AppBarButton>
         <AppBarButton Icon="Italic" Label="Italic" Click="OnItalicClick">
-            <AppBarButton.KeyboardAccelerators>
-                <KeyboardAccelerator Modifiers="Control" Key="B"/>
-            </AppBarButton.KeyboardAccelerators>
         </AppBarButton>
         <AppBarButton Icon="Underline" Label="Underline" Click="OnUnderlineClick">
-            <AppBarButton.KeyboardAccelerators>
-                <KeyboardAccelerator Modifiers="Control" Key="B"/>
-            </AppBarButton.KeyboardAccelerators>
         </AppBarButton>
         <AppBarSeparator/>
-
+        <AppBarButton Icon="AlignLeft" Label="Align Left" Click="OnAlignLeftClick">
+        </AppBarButton>
+        <AppBarButton Icon="AlignCenter" Label="Align Center" Click="OnAlignCenterClick">
+        </AppBarButton>
+        <AppBarButton Icon="AlignRight" Label="Align Right" Click="OnAlignRightClick">
+        </AppBarButton>
+        <AppBarButton Label="Justify" Click="OnAlignJustifyClick">
+            <AppBarButton.Icon>
+                <PathIcon Margin="0 -2 0 2" Data="F1 M24,24z M0,0z M2,5.75A0.75,0.75,0,0,1,2.75,5L21.25,5A0.75,0.75,0,0,1,21.25,6.5L2.75,6.5A0.75,0.75,0,0,1,2,5.75z M2,18.75A0.75,0.75,0,0,1,2.75,18L21.25,18A0.75,0.75,0,0,1,21.25,19.5L2.75,19.5A0.75,0.75,0,0,1,2,18.75z M2.75,11.5A0.75,0.75,0,0,0,2.75,13L21.25,13A0.75,0.75,0,0,0,21.25,11.5L2.75,11.5z"></PathIcon>
+            </AppBarButton.Icon>
+        </AppBarButton>
+        <AppBarSeparator/>
+        <AppBarButton Icon="FontDecrease" Label="Decrease Font Size" Click="OnFontDecreaseClick">
+            <AppBarButton.KeyboardAccelerators>
+                <KeyboardAccelerator Modifiers="Control, Shift" Key="Number0"/>
+            </AppBarButton.KeyboardAccelerators>
+        </AppBarButton>
+        <AppBarButton Icon="FontIncrease" Label="Increase Font Size" Click="OnFontIncreaseClick">
+            <AppBarButton.KeyboardAccelerators>
+                <KeyboardAccelerator Modifiers="Control, Shift" Key="Number1"/>
+            </AppBarButton.KeyboardAccelerators>
+        </AppBarButton>
     </CommandBar>
-    <RichEditBox Grid.Row="1" TextChanged="RichEditBox_OnTextChanged" x:Name="RichEditorBox"/>
+    <RichEditBox Grid.Row="1" TextChanged="RichEditBox_OnTextChanged" x:Name="RichEditorBox" IsReadOnly="True" CornerRadius="0"/>
 </Grid>

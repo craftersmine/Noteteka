@@ -14,6 +14,10 @@ namespace App.Controls
     public sealed partial class NotepadPageEditor : Grid
     {
         public bool IsChanged { get; private set; }
+        public bool IsEditing
+        {
+            get => !RichEditorBox.IsReadOnly;
+        }
         public NotepadPage Page { get; private set; }
         public RichEditTextDocument Document
         {
@@ -40,6 +44,9 @@ namespace App.Controls
 
         private void OnBoldClick(object sender, RoutedEventArgs e)
         {
+            if (!IsEditing)
+                return;
+
             ITextSelection selectedText = RichEditorBox.Document.Selection;
             if (selectedText != null)
             {
@@ -51,6 +58,9 @@ namespace App.Controls
 
         private void OnItalicClick(object sender, RoutedEventArgs e)
         {
+            if (!IsEditing)
+                return;
+
             ITextSelection selectedText = RichEditorBox.Document.Selection;
             if (selectedText != null)
             {
@@ -62,6 +72,9 @@ namespace App.Controls
 
         private void OnUnderlineClick(object sender, RoutedEventArgs e)
         {
+            if (!IsEditing)
+                return;
+
             ITextSelection selectedText = RichEditorBox.Document.Selection;
             if (selectedText != null)
             {
@@ -79,12 +92,136 @@ namespace App.Controls
 
         private void OnUndoClick(object sender, RoutedEventArgs e)
         {
+            if (!IsEditing)
+                return;
+
             RichEditorBox.Document.Undo();
         }
 
         private void OnRedoClick(object sender, RoutedEventArgs e)
         {
+            if (!IsEditing)
+                return;
+
             RichEditorBox.Document.Redo();
+        }
+
+        private void OnEditSwitchClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing)
+            {
+                RichEditorBox.IsReadOnly = false;
+            }
+            else
+                RichEditorBox.IsReadOnly = true;
+        }
+
+        private void OnAlignLeftClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing)
+                return;
+
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                ITextParagraphFormat selectedParagraphFormat = selectedText.ParagraphFormat;
+                selectedParagraphFormat.Alignment = ParagraphAlignment.Left;
+            }
+        }
+
+        private void OnAlignCenterClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing)
+                return;
+
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                ITextParagraphFormat selectedParagraphFormat = selectedText.ParagraphFormat;
+                selectedParagraphFormat.Alignment = ParagraphAlignment.Center;
+            }
+        }
+
+        private void OnAlignRightClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing)
+                return;
+
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                ITextParagraphFormat selectedParagraphFormat = selectedText.ParagraphFormat;
+                selectedParagraphFormat.Alignment = ParagraphAlignment.Right;
+            }
+        }
+
+        private void OnAlignJustifyClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing)
+                return;
+
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                ITextParagraphFormat selectedParagraphFormat = selectedText.ParagraphFormat;
+                selectedParagraphFormat.Alignment = ParagraphAlignment.Justify;
+            }
+        }
+
+        private void OnCutClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing) 
+                return;
+
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                selectedText.Cut();
+            }
+        }
+
+        private void OnCopyClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing) 
+                return;
+
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                selectedText.Copy();
+            }
+        }
+
+        private void OnPasteClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing) 
+                return;
+
+            RichEditorBox.Document.Selection.Paste(0);
+        }
+
+        private void OnFontDecreaseClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing) 
+                return;
+
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                selectedText.CharacterFormat.Size -= 1;
+            }
+        }
+
+        private void OnFontIncreaseClick(object sender, RoutedEventArgs e)
+        {
+            if (!IsEditing) 
+                return;
+
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                selectedText.CharacterFormat.Size += 1;
+            }
         }
     }
 }
