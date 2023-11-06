@@ -1,0 +1,52 @@
+# Privacy Policy
+
+Effective Date: **06.11.23**
+
+This Privacy Policy is designed to help you understand how BuddyTeam LLC (**subject to change**) ("we," "us," or "our") collects, 
+uses, and protects your personal information when you use our application. We respect your privacy and are 
+committed to safeguarding your personal data.
+
+## 1. Data Storage
+
+Our application does not use any online services or cloud storage. 
+All user data is stored on your local machine, meaning it does not leave your device unless explicitly moved or shared by you.
+
+## 2. Collection of Information
+
+Our application does not collect any personal information about you. We do not gather or store any data about your usage patterns, 
+location, or any other personal information. We respect your privacy and are committed to maintaining the confidentiality of your data.
+
+## 3. Changes to Your Data
+
+You have the ability to change and manage your data within the application. You can modify or delete your data as needed.
+
+## 4. Notification of Data Changes
+
+If any changes to your data occur that are not initiated by you, we will notify you promptly. These changes could be related to 
+software updates, or any modifications necessary to maintain the application's functionality. Rest assured, we will always strive 
+to inform you about such changes in a transparent and timely manner.
+
+## 5. Crash Reports
+
+Our application may generate crash reports in the event of a software error or malfunction. 
+These reports do not contain any personal information and are solely focused on technical details related to the application's performance.
+Users have the option to send these crash reports manually. These reports are stored locally on your machine in the "%AppData%\Noteteka\crash-reports" directory. 
+They do not pose a risk to your personal privacy.
+
+## 6. Security
+
+While we do not collect or store your personal information, we take reasonable measures to protect the data stored on your 
+local machine by implementing industry-standard security practices. However, it's important to note that the security 
+of your data ultimately depends on your device's settings and your own actions.
+
+## 7. Contact Us
+
+If you have any questions or concerns about this Privacy Policy or the data stored on your local machine, please contact us here https://github.com/craftersmine/Noteteka/issues.
+
+## 8. Changes to this Privacy Policy
+
+We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, 
+legal, or regulatory reasons. The updated Privacy Policy will be made available within the application, 
+and the "Effective Date" will be changed accordingly.
+
+**By using our application, you acknowledge and consent to the practices described in this Privacy Policy.**
