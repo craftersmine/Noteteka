@@ -28,13 +28,63 @@ namespace App.Controls
 
             using (MemoryStream stream = new MemoryStream(Page.Data))
             {
-                RichEditorBox.Document.LoadFromStream(TextSetOptions.None, stream.AsRandomAccessStream());
+                RichEditorBox.Document.LoadFromStream(TextSetOptions.FormatRtf, stream.AsRandomAccessStream());
             }
         }
 
         private async void RichEditBox_OnTextChanged(object sender, RoutedEventArgs e)
         {
             IsChanged = true;
+        }
+
+
+        private void OnBoldClick(object sender, RoutedEventArgs e)
+        {
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+                charFormatting.Bold = FormatEffect.Toggle;
+                selectedText.CharacterFormat = charFormatting;
+            }
+        }
+
+        private void OnItalicClick(object sender, RoutedEventArgs e)
+        {
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+                charFormatting.Italic = FormatEffect.Toggle;
+                selectedText.CharacterFormat = charFormatting;
+            }
+        }
+
+        private void OnUnderlineClick(object sender, RoutedEventArgs e)
+        {
+            ITextSelection selectedText = RichEditorBox.Document.Selection;
+            if (selectedText != null)
+            {
+                ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+                if (charFormatting.Underline == UnderlineType.None)
+                {
+                    charFormatting.Underline = UnderlineType.Single;
+                }
+                else {
+                    charFormatting.Underline = UnderlineType.None;
+                }
+                selectedText.CharacterFormat = charFormatting;
+            }
+        }
+
+        private void OnUndoClick(object sender, RoutedEventArgs e)
+        {
+            RichEditorBox.Document.Undo();
+        }
+
+        private void OnRedoClick(object sender, RoutedEventArgs e)
+        {
+            RichEditorBox.Document.Redo();
         }
     }
 }

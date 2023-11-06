@@ -12,24 +12,28 @@
         <RowDefinition/>
     </Grid.RowDefinitions>
     <CommandBar Grid.Row="0" Background="Transparent" HorizontalAlignment="Left">
-        <AppBarButton Icon="Undo" Label="Undo">
-
+        <AppBarButton Icon="Undo" Label="Undo" Click="OnUndoClick">
+            <AppBarButton.KeyboardAccelerators>
+                <KeyboardAccelerator Modifiers="Control" Key="Z"/>
+            </AppBarButton.KeyboardAccelerators>
         </AppBarButton>
-        <AppBarButton Icon="Redo" Label="Redo">
-
+        <AppBarButton Icon="Redo" Label="Redo" Click="OnRedoClick">
+            <AppBarButton.KeyboardAccelerators>
+                <KeyboardAccelerator Modifiers="Control" Key="Y"/>
+            </AppBarButton.KeyboardAccelerators>
         </AppBarButton>
         <AppBarSeparator/>
-        <AppBarButton Icon="Bold" Label="Bold">
+        <AppBarButton Icon="Bold" Label="Bold" Click="OnBoldClick">
             <AppBarButton.KeyboardAccelerators>
                 <KeyboardAccelerator Modifiers="Control" Key="B"/>
             </AppBarButton.KeyboardAccelerators>
         </AppBarButton>
-        <AppBarButton Icon="Italic" Label="Italic">
+        <AppBarButton Icon="Italic" Label="Italic" Click="OnItalicClick">
             <AppBarButton.KeyboardAccelerators>
                 <KeyboardAccelerator Modifiers="Control" Key="B"/>
             </AppBarButton.KeyboardAccelerators>
         </AppBarButton>
-        <AppBarButton Icon="Underline" Label="Underline">
+        <AppBarButton Icon="Underline" Label="Underline" Click="OnUnderlineClick">
             <AppBarButton.KeyboardAccelerators>
                 <KeyboardAccelerator Modifiers="Control" Key="B"/>
             </AppBarButton.KeyboardAccelerators>
