@@ -16,9 +16,11 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Core;
 using App.Core;
 using App.Dialogs;
 using Microsoft.EntityFrameworkCore;
+using App.Pages;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -175,6 +177,32 @@ namespace App
             App.DatabaseContext.SaveChanges();
 
             UpdateToDoTasks();
+        }
+
+        private void OnCardClick(object sender, RoutedEventArgs e)
+        {
+            App.MainWindow.NavigateTo(((Control)sender).Tag.ToString());
+
+            throw new Exception("Test unhandled exception");
+
+            //switch (((Control)sender)?.Tag.ToString()?.ToLower())
+            //{
+            //    case "calendar":
+            //        App.MainWindow.NavigateTo<CalendarPage>();
+            //        break;
+            //    case "notes":
+            //        App.MainWindow.NavigateTo<NotesPage>();
+            //        break;
+            //    case "notebook":
+            //        App.MainWindow.NavigateTo<Pages.NotepadPage>();
+            //        break;
+            //    case "tasks":
+            //        App.MainWindow.NavigateTo<ToDoTasksPage>();
+            //        break;
+            //    case "settings":
+            //        App.MainWindow.NavigateTo<SettingsPage>();
+            //        break;
+            //}
         }
     }
 }
