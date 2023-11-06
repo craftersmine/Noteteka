@@ -183,8 +183,6 @@ namespace App
         {
             App.MainWindow.NavigateTo(((Control)sender).Tag.ToString());
 
-            throw new Exception("Test unhandled exception");
-
             //switch (((Control)sender)?.Tag.ToString()?.ToLower())
             //{
             //    case "calendar":
