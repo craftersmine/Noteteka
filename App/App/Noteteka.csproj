@@ -31,6 +31,7 @@
 		<UpdatePackageVersion>False</UpdatePackageVersion>
 		<AssemblyInfoVersionType>SettingsVersion</AssemblyInfoVersionType>
 		<InheritWinAppVersionFrom>None</InheritWinAppVersionFrom>
+		<ApplicationIcon>Main.ico</ApplicationIcon>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Content Remove="Assets\Legal\Noteteka_PrivacyPolicy.txt" />
@@ -64,6 +65,7 @@
 		<Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
 		<Content Include="Assets\StoreLogo.png" />
 		<Content Include="Assets\Wide310x150Logo.scale-200.png" />
+		<Content Include="Main.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
