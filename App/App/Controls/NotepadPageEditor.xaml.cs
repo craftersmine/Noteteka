@@ -30,9 +30,12 @@ namespace App.Controls
 
             this.InitializeComponent();
 
-            using (MemoryStream stream = new MemoryStream(Page.Data))
+            if (Page.Data is not null && Page.Data.Length > 0)
             {
-                RichEditorBox.Document.LoadFromStream(TextSetOptions.FormatRtf, stream.AsRandomAccessStream());
+                using (MemoryStream stream = new MemoryStream(Page.Data))
+                {
+                    RichEditorBox.Document.LoadFromStream(TextSetOptions.FormatRtf, stream.AsRandomAccessStream());
+                }
             }
         }
 
