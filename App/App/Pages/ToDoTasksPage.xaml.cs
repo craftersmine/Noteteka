@@ -142,10 +142,28 @@ namespace App.Pages
             UpdateToDoTasks();
         }
 
-        private void ContextDeleteClick(object sender, RoutedEventArgs e)
+        private async void ContextDeleteClick(object sender, RoutedEventArgs e)
         {
             MenuFlyoutItem item = sender as MenuFlyoutItem;
-            // TODO: implement task deletion
+
+            ToDoTask task = App.DatabaseContext.ToDoTasks.FirstOrDefault(t => t.Id == int.Parse(item.Tag.ToString()));
+
+            ContentDialog dlg = new ContentDialog();
+            AddEditNoteDialog dlgContent = new AddEditNoteDialog(null);
+            dlg.XamlRoot = this.XamlRoot;
+            dlg.Title = "Remove task";
+            dlg.Content = "Are you sure you want to remove this task?";
+            dlg.CloseButtonText = "No";
+            dlg.PrimaryButtonText = "Yes";
+            dlg.CloseButtonClick += (dialog, args) => dialog.Hide();
+            switch (await dlg.ShowAsync())
+            {
+                case ContentDialogResult.Primary:
+                    App.DatabaseContext.ToDoTasks.Remove(task);
+                    await App.DatabaseContext.SaveChangesAsync();
+                    UpdateToDoTasks();
+                    break;
+            }
         }
 
         private void ContextEditClick(object sender, RoutedEventArgs e)
