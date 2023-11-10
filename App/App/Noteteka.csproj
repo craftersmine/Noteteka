@@ -15,9 +15,9 @@
 		<!-- This bundles the WinUI3 components -->
 		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 		<AssemblyName>Noteteka</AssemblyName>
-		<Version>0.2-beta</Version>
-		<AssemblyVersion>0.2.23310.1229</AssemblyVersion>
-		<FileVersion>0.2.23310.1229</FileVersion>
+		<Version>0.3-beta</Version>
+		<AssemblyVersion>0.3.23314.0159</AssemblyVersion>
+		<FileVersion>0.3.23314.0159</FileVersion>
 		<Title>Noteteka</Title>
 		<Authors>BuddyTeam</Authors>
 		<Company>BuddyTeam LLC</Company>
